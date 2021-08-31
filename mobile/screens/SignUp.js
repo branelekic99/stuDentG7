@@ -74,7 +74,7 @@ const SignUp = ({navigation}) => {
         <KeyboardAvoidingView style={{flex:1}}>
         <View style={styles.container}>
             <View style={styles.header}>
-                <Text style={styles.header_text}>Register!</Text>
+                <Text style={styles.header_text}>Create your account!</Text>
             </View>
             <Animatable.View animation={"fadeInUpBig"} style={[styles.footer, {backgroundColor: colors.background}]}>
                 <Text style={[styles.footer_text, {color: colors.text}]}>First name</Text>
