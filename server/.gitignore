@@ -3,6 +3,7 @@ node_modules/
 dist/
 
 config/config.json
+config/smtpConfig.json
 images/*
 
 images/*

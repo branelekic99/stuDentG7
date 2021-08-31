@@ -1,13 +1,14 @@
 const nodemailer = require("nodemailer");
+const config = require(__dirname + '/../config/smtpConfig.json');
 
 exports.sendEmail = async (receiver, password) => {
 
   let transporter = nodemailer.createTransport({
-    host: "smtp-relay.sendinblue.com",
-    port: 587,
+    host: config.host,
+    port: config.port,
     auth: {
-      user: "jelena.kicic@student.etf.unibl.org", 
-      pass: "LrsCxvzPREjqfB67", 
+      user: config.user, 
+      pass: config.pass, 
     },
   });
 
