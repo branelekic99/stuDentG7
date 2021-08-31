@@ -24,7 +24,7 @@ const Login = () => {
         dispatch(checkUserStatus());
     }, [])
     if (auth_status === CHECKING) {
-        return <h1>checking....</h1>
+        return <h3>checking....</h3>
     }
     if (authenticated) {
         return <Redirect path={"/"}/>

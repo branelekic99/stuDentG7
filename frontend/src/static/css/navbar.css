@@ -4,9 +4,11 @@ body .navbar  {
 }
 
 body .navbar-collapse .navbar-nav .nav-link , body .navbar-collapse .navbar-nav .nav-link a {
-    font-size: 18px;
+    font-size: 16px;
     color: var(--full-white);
     text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 600;
 }
 
 body .navbar-collapse .navbar-nav .nav-link:hover {
@@ -31,7 +33,7 @@ body .dropdown-toggle::after {
 }
 
 body .nav-link a:hover {
-    border-bottom: 1px solid var(--full-white);
+    border-bottom: 2px solid var(--full-white);
     font-weight: 600;
 }
 
