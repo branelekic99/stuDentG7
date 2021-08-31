@@ -17,6 +17,14 @@ exports.sendEmail = async (receiver, password) => {
     from: '"StuDent" <jelena.kicic@student.etf.unibl.org>', // sender address
     to: receiver,//receiver, // list of receivers
     subject: "Dobro došli na StuDent", // Subject line
-    html: "<t1>Vaša lozinka je<br/><b>" + password + "</b></t1>", // html body
+    html: `
+      <div> 
+        Dobro došli na StuDent,<br/>
+        Vaša lozinka je<br/>
+        <b>` + password + `</b><br/><br/>
+        Za blistav osmijeh,<br/>
+        Vaš StuDent
+      </div>
+    ` // html body
   });
 }
