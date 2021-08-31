@@ -10,11 +10,11 @@ module.exports = function (app) {
 
     app.post("/admin/create/schedule", [authJwt.verifyToken, verifySchedule.verifyEndAndStartTime], scheduleController.create);
 
-    app.get("/get/schedule/:id", [authJwt.verifyToken], scheduleController.getScheduleById);
+    app.get("/get/schedule/:id", scheduleController.getScheduleById);
 
-    app.get("/get/schedules/category/:id", [authJwt.verifyToken], scheduleController.getSchedules);
+    app.get("/get/schedules/category/:id", scheduleController.getSchedules);
 
-    app.get("/get/available_apointments/category/:id", [authJwt.verifyToken], scheduleController.getAvailableApointmentsByCategoryId);
+    app.get("/get/available_apointments/category/:id", scheduleController.getAvailableApointmentsByCategoryId);
 
     app.get("/get/reserved_apointments/category/:id", [authJwt.verifyToken], scheduleController.getReservedApointmentsByCategoryId);
 
