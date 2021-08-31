@@ -34,7 +34,8 @@ server/config/config.json
     "dialect": "postgres"
   }, ...
 } 
-
+```
+```
 server/config/smtpConfig.json
 {
     "host": "",
