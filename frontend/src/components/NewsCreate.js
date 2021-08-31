@@ -19,24 +19,28 @@ const NewsCreate = ({form_ref}) => {
         dispatch(addNews(formData));
     }
     return (
-        <div>
+        <>
             <form onSubmit={handleSubmit(onsubmit)} ref={form_ref}>
-                <div>
-                    <label>Title</label>
-                    <input type={"text"} {...register("title",{required:true})} />
-                    {errors.title && <span>{REQUIRED_FIELD}</span>}
+                <div className={"row"}>
+                    <div className={"col-12 col-md-6 col-lg-6 col-xl-6 form-group"}>
+                        <label>Title</label>
+                        <input type={"text"} className={"form-control"} {...register("title",{required:true})} />
+                        {errors.title && <span>{REQUIRED_FIELD}</span>}
+                    </div>
+                    <div className={"col-12 col-md-6 col-lg-6 col-xl-6 form-group"}>
+                        <label>Image</label>
+                        <input type={"file"} className={"form-control"} {...register("image")}/>
+                    </div>
                 </div>
-                <div>
-                    <label>Content</label>
-                    <textarea {...register("content",{required:true})} />
-                    {errors.content && <span>{REQUIRED_FIELD}</span>}
-                </div>
-                <div>
-                    <label>Image</label>
-                    <input type={"file"} {...register("image")}/>
+                <div className={"row"}>
+                    <div className={"col-12 col-md-12 col-lg-12 col-xl-12 form-group"}>
+                        <label>Content</label>
+                        <textarea className={"form-control"} {...register("content",{required:true})} />
+                        {errors.content && <span>{REQUIRED_FIELD}</span>}
+                    </div>
                 </div>
             </form>
-        </div>
+        </>
     );
 };
 

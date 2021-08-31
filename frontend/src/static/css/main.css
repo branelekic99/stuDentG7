@@ -1,0 +1,43 @@
+@import "button.css";
+@import "navbar.css";
+@import "media-query.css";
+
+:root {
+    --full-white: #FFFFFF;
+    --black: #111725;
+
+    --light-gray:#e6e6e6;
+
+    --light-blue:#2bb6d8;
+    --light-blue-hover:#159fc2;
+
+    /* color for error */
+    --red: #FF6663;
+}
+
+body {
+    background-color: var(--light-gray)!important;
+}
+
+.sv-login-page-form {
+    position: fixed;
+    right: 0;
+    bottom: 50%;
+}
+
+.sv-border-bottom {
+    border-bottom: 1px solid var(--light-blue-hover);
+}
+
+.sv-login-page {
+    background-image: url("../images/IMG-882ce82ff6d3f5141547593314e7b7d7-V.jpg");
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.sv-image-card {
+    max-height: 303px;
+    min-height: 303px;
+}
