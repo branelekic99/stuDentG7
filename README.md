@@ -21,6 +21,7 @@ Root repository for StuDent project with frontend and api
 * Navigate to client directory
 * Run npm install
 * Run npm start
+* Log in to administrator panel with username: "Admin" and password: "admin"
 
 
 server/config/config.json
