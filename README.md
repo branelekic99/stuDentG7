@@ -23,7 +23,7 @@ Root repository for StuDent project with frontend and api
 * Run npm start
 * Log in to administrator panel with username: "Admin" and password: "admin"
 
-
+```
 server/config/config.json
 {
     "development": {
@@ -42,3 +42,4 @@ server/config/smtpConfig.json
     "user": "", 
     "pass": ""
 }
+```
