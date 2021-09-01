@@ -27,7 +27,7 @@ const AddImage = ({form_ref}) => {
             <Form onSubmit={handleSubmit} ref={form_ref}>
                 <Form.Group className={"mb-3"} controlId={"formBasicEmail"}>
                     <Form.Label>Image</Form.Label>
-                    <Form.Control type={"file"} onChange={handleFileChange}/>
+                    <Form.Control type={"file"} className={"form-control"} onChange={handleFileChange}/>
                     {errorMessage&&(<p>{errorMessage}</p>)}
                 </Form.Group>
             </Form>

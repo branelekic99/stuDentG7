@@ -1,0 +1,26 @@
+.btn-show-password {
+    float: right;
+    margin-top: -2.4rem;
+    z-index: 2;
+    color: var(--light-gray);
+}
+
+body .alert {
+    padding: 0.5rem 0.5rem;
+    margin-bottom: unset;
+}
+
+body .btn-primary {
+    background-color: var(--light-blue);
+    border-color: var(--light-blue);
+}
+
+body .btn-primary:hover {
+    background-color: var(--light-blue-hover)!important;
+    border-color: var(--light-blue-hover)!important;
+}
+
+.btn-check:focus + .btn-primary, .btn-primary:focus {
+    background-color: var(--light-blue)!important;
+    border-color: var(--light-blue)!important;
+}
