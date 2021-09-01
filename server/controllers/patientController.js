@@ -69,7 +69,8 @@ exports.signin = async (req, res) => {
             email: patient.email,
             phoneNumber: patient.phoneNumber,
             age: patient.age,
-            accessToken: token
+            accessToken: token,
+            imageUrl: patient.imageUrl
         });
     } catch(err) {
         res.status(500).send({ message: err.message });
@@ -81,6 +82,13 @@ exports.update = async (req, res) => {
         let form = new multiparty.Form();
         form.parse(req, function(err, fields, files) {
             if(fields != null && fields.firstName != null && fields.lastName != null && fields.email != null && fields.phoneNumber != null && fields.age != null) {
+                if(fields.imageUrl == null) {
+                    Patient.findOne({where: {
+                        id: req.params.id
+                    }}).then(patient => {
+                        fs.unlinkSync(patient.imageUrl);
+                    });
+                }                
                 if(files.image != null) {
                     try {
                         const magic = new mmm.Magic(mmm.MAGIC_MIME_TYPE);
@@ -91,14 +99,13 @@ exports.update = async (req, res) => {
                                 
                                 try {
                                     fs.copyFileSync(files.image[0].path, location);
-
                                     Patient.update({
                                         firstName: fields.firstName[0],
                                         lastName: fields.lastName[0],
                                         email: fields.email[0],
                                         phoneNumber: fields.phoneNumber[0],
                                         age: fields.age[0],
-                                        imageUrl: 'http://127.0.0.1:8000' + '/' + location
+                                        imageUrl: location
                                     }, {where: {
                                         id: req.params.id
                                     }}).then(
@@ -137,7 +144,7 @@ exports.update = async (req, res) => {
                         email: fields.email[0],
                         phoneNumber: fields.phoneNumber[0],
                         age: fields.age[0],
-                        imageUrl: null
+                        imageUrl: (fields.imageUrl != null ? fields.imageUrl[0] : null)
                     }, {where: {
                         id: req.params.id
                     }}).then(
@@ -212,7 +219,8 @@ exports.getPatient = async (req, res) => {
             lastName: patient.lastName,
             email: patient.email,
             phoneNumber: patient.phoneNumber,
-            age: patient.age
+            age: patient.age, 
+            imageUrl: patient.imageUrl
         });
     } catch(err) {
         res.status(500).send({ message: err.message });

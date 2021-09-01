@@ -4,7 +4,7 @@ const categoryController = require("../controllers/categoryController");
 const scheduleController = require("../controllers/scheduleController");
 
 module.exports = function (app) {
-    app.get("/get/categories", [authJwt.verifyToken], categoryController.getCategories);
+    app.get("/get/categories", categoryController.getCategories);
 
     app.post("/create/category", categoryController.createCategory);
 
