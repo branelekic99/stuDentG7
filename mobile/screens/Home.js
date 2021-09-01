@@ -6,6 +6,9 @@ const Home = ({navigation}) => {
     const handleMenuPress = ()=>{
         navigation.openDrawer();
     }
+    const handleMakeAppointment = ()=>{
+        navigation.navigate("Schedule");
+    }
     return (
         <View style={styles.container}>
             <StatusBar translucent backgroundColor={"transparent"} />
@@ -19,7 +22,7 @@ const Home = ({navigation}) => {
                        <Text style={styles.title}>StuDent</Text>
                    </View>
                 <View style={styles.bottomView}>
-                    <TouchableOpacity style={styles.makeAppointment}>
+                    <TouchableOpacity style={styles.makeAppointment} onPress={handleMakeAppointment}>
                         <Text style={styles.makeAppointmentText}>Naruci se</Text>
                     </TouchableOpacity>
                     <Text style={styles.message}>Ne dopustiste da vasi zubi propadaju!</Text>

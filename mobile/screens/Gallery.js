@@ -22,15 +22,8 @@ const Gallery = () => {
     const [modalVisible,setModalVisible] = useState(false);
     const [selectedImage,setSelectedImage] = useState("");
 
-    // console.log(images);
     const fetchData = async ()=>{
-        const token = await AsyncStorage.getItem(ASYNC_STORAGE_KEY);
-        const result = await axios.get(SERVER_ADRESA + "/get/gallery",{
-            headers:{
-                'Content-Type':"application/json",
-                "x-access-token": token,
-            }
-        });
+        const result = await axios.get(SERVER_ADRESA + "/get/gallery");
         setImages(result.data);
     };
 

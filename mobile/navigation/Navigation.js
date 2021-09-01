@@ -11,7 +11,7 @@ import News from "../screens/News";
 import DrawerContent from "./DrawerContent";
 import {useSelector} from "react-redux";
 import Profile from "../screens/Profile";
-import Header from "./Header";
+import Schedule from "../screens/Schedule";
 
 
 const AuthStack = createStackNavigator();
@@ -28,15 +28,11 @@ const AuthStackScreen = ()=>(
 )
 const DrawerScreen = ()=>(
     <Drawer.Navigator drawerContent={props=><DrawerContent {...props}/>}>
-        <Drawer.Screen name={"Home"} component={Home} options={({navigation})=>{
-            return{
-                headerShown:false,
-            }
-        }}/>
-        <Drawer.Screen name={"News"} component={News} options={{headerShown:true,headerStyle:{
-            }}}/>
+        <Drawer.Screen name={"Home"} component={Home} options={{headerShown:false}}/>
+        <Drawer.Screen name={"News"} component={News} options={{headerShown:true}}/>
         <Drawer.Screen name={"Gallery"} component={Gallery} options={{headerShown:true}}/>
         <Drawer.Screen name={"Profile"} component={Profile} options={{headerShown:true}}/>
+        <Drawer.Screen name={"Schedule"} component={Schedule} options={{headerShown:true}}/>
     </Drawer.Navigator>
 )
 const RootStack = createStackNavigator();

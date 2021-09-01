@@ -56,6 +56,8 @@ export const signOut = ()=>{
 export const updateProfile = (data,userId) =>{
     return async dispatch =>{
         try{
+            console.log("ovo je data",data);
+            console.log("ovo je user id",userId);
             const token = await AsyncStorage.getItem(ASYNC_STORAGE_KEY);
            const result = await axios.put(SERVER_ADRESA + `/patient/update/${userId}`,data,{
                 headers:{
@@ -68,6 +70,7 @@ export const updateProfile = (data,userId) =>{
                payload:result.data
            })
         }catch (err){
+            console.log(err)
             throw new Error("Something went wrong!");
         }
     }
@@ -82,6 +85,7 @@ export const getUserById = (id)=>{
                     "x-access-token": token,
                 }
             });
+            console.log(result.data)
             dispatch({
                 type:GET_PROFILE,
                 payload:result.data,

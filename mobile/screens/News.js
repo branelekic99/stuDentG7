@@ -25,13 +25,7 @@ const News = () => {
 
     const fetchData = async ()=>{
         setIsLoading(true);
-        const token = await AsyncStorage.getItem(ASYNC_STORAGE_KEY);
-        const result = await axios.get(SERVER_ADRESA + "/get/news/paginated",{
-            headers:{
-                'Content-Type':"application/json",
-                "x-access-token": token,
-            }
-        });
+        const result = await axios.get(SERVER_ADRESA + "/get/news/paginated");
         setNewsData(result.data.rows);
         setIsLoading(false);
     };

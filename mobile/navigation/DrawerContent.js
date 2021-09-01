@@ -6,6 +6,7 @@ import {signOut} from "../redux-store/actions/auth";
 import {useDispatch,useSelector} from "react-redux";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import Fontisto from "react-native-vector-icons/Fontisto";
 
 const DrawerContent = (props)=>{
     const {authenticated,firstName,lastName,email} = useSelector(state=>state.auth)
@@ -72,6 +73,17 @@ const DrawerContent = (props)=>{
                           )}
                           label="News"
                           onPress={() => {props.navigation.navigate('News')}}
+                      />
+                      <DrawerItem
+                          icon={({color, size}) => (
+                              <Fontisto
+                                  name="calendar"
+                                  color={color}
+                                  size={size}
+                              />
+                          )}
+                          label="Schedule"
+                          onPress={() => {props.navigation.navigate('Schedule')}}
                       />
                   </Drawer.Section>
               </View>
