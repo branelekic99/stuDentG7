@@ -14,14 +14,16 @@ Root repository for StuDent project with frontend and api
 * Run ```npx sequelize-cli db:migrate```
 * Run ```npx sequelize-cli db:seed:all```
 * Run ```npm start``` 
+* Add smtpConfig.json file from bellow containg credentials for connecting to SMTP server
 
 ### How to run Client? ###
 
 * Navigate to client directory
 * Run npm install
 * Run npm start
+* Log in to administrator panel with username: "Admin" and password: "admin"
 
-
+```
 server/config/config.json
 {
     "development": {
@@ -31,4 +33,14 @@ server/config/config.json
     "host": "127.0.0.1",
     "dialect": "postgres"
   }, ...
+} 
+```
+```
+server/config/smtpConfig.json
+{
+    "host": "",
+    "port": ,
+    "user": "", 
+    "pass": ""
 }
+```

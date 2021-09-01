@@ -1,13 +1,14 @@
 const nodemailer = require("nodemailer");
+const config = require(__dirname + '/../config/smtpConfig.json');
 
 exports.sendEmail = async (receiver, password) => {
 
   let transporter = nodemailer.createTransport({
-    host: "smtp-relay.sendinblue.com",
-    port: 587,
+    host: config.host,
+    port: config.port,
     auth: {
-      user: "jelena.kicic@student.etf.unibl.org", 
-      pass: "LrsCxvzPREjqfB67", 
+      user: config.user, 
+      pass: config.pass, 
     },
   });
 
@@ -16,6 +17,14 @@ exports.sendEmail = async (receiver, password) => {
     from: '"StuDent" <jelena.kicic@student.etf.unibl.org>', // sender address
     to: receiver,//receiver, // list of receivers
     subject: "Dobro došli na StuDent", // Subject line
-    html: "<t1>Vaša lozinka je<br/><b>" + password + "</b></t1>", // html body
+    html: `
+      <div> 
+        Dobro došli na StuDent,<br/>
+        Vaša lozinka je<br/>
+        <b>` + password + `</b><br/><br/>
+        Za blistav osmijeh,<br/>
+        Vaš StuDent
+      </div>
+    ` // html body
   });
 }

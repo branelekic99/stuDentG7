@@ -6,9 +6,9 @@ module.exports = function (app) {
    
 
 
-    app.get("/get/news/paginated", [authJwt.verifyToken], newsController.getNewsPaginated);
+    app.get("/get/news/paginated", newsController.getNewsPaginated);
 
-    app.get("/get/news/:id", [authJwt.verifyToken, verifyNews.checkIfNewsExists], newsController.getNews);
+    app.get("/get/news/:id", [verifyNews.checkIfNewsExists], newsController.getNews);
 
     app.post("/admin/create/news", [authJwt.verifyToken], newsController.create);
 
