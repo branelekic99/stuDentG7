@@ -43,6 +43,9 @@ module.exports = (sequelize, DataTypes) => {
     token: {
       type: DataTypes.STRING
     },
+    imageUrl: {
+      type: DataTypes.STRING
+    },
     createdAt: {
       allowNull: false,
       type: DataTypes.DATE,
