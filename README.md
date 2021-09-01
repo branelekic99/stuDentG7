@@ -10,7 +10,7 @@ Root repository for StuDent project with frontend and api
 
 * Navigate to server directory
 * Run ```npm install```
-* Add config.json file from bellow to config directory with local data
+* Add config.json file from bellow to config directory with local connection data for your postgres database
 * Run ```npx sequelize-cli db:migrate```
 * Run ```npx sequelize-cli db:seed:all```
 * Run ```npm start``` 
