@@ -4,7 +4,7 @@ Root repository for StuDent project with frontend and api
 
 ### How do I get set up? ###
 
-* Make sure you have Node v14.17.3+ installed, Python 3.9.7 and sequelize-cli (```npm install --save-dev sequelize-cli```)
+* Make sure you have Node v14.17.3 installed, Python 3.9.7 and sequelize-cli (```npm install --save-dev sequelize-cli```)
 
 ### How to run the API? ###
 
