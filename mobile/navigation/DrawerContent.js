@@ -1,12 +1,17 @@
 import React from "react";
 import {View,StyleSheet} from "react-native";
 import {DrawerContentScrollView,DrawerItem} from "@react-navigation/drawer";
-import {Avatar,Title,Caption,Paragraph,Drawer,Text,TouchableRipple,Switch,useTheme} from "react-native-paper";
+import {Avatar,Title,Caption,Drawer,useTheme} from "react-native-paper";
+import {signOut} from "../redux-store/actions/auth";
+import {useDispatch,useSelector} from "react-redux";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Entypo from 'react-native-vector-icons/Entypo';
+import FontAwesome from "react-native-vector-icons/FontAwesome";
+import Fontisto from "react-native-vector-icons/Fontisto";
 
 const DrawerContent = (props)=>{
+    const {authenticated,firstName,lastName,email} = useSelector(state=>state.auth)
     const paperTheme = useTheme();
+    const dispatch = useDispatch();
     return(
         <View style={{flex:1}}>
             <DrawerContentScrollView {...props}>
@@ -20,8 +25,8 @@ const DrawerContent = (props)=>{
                               size={50}
                           />
                           <View style={{marginLeft:15, flexDirection:'column'}}>
-                              <Title style={styles.title}>John Doe</Title>
-                              <Caption style={styles.caption}>@j_doe</Caption>
+                              <Title style={styles.title}>{firstName?firstName:"Guest"} {lastName?lastName:""}</Title>
+                              <Caption style={styles.caption}>{email?email:"no-email"}</Caption>
                           </View>
                       </View>
                   </View>
@@ -38,7 +43,7 @@ const DrawerContent = (props)=>{
                           label="Home"
                           onPress={() => {props.navigation.navigate('Home')}}
                       />
-                      <DrawerItem
+                      {authenticated && <DrawerItem
                           icon={({color, size}) => (
                               <Icon
                                   name="account-outline"
@@ -48,7 +53,7 @@ const DrawerContent = (props)=>{
                           )}
                           label="Profile"
                           onPress={() => {props.navigation.navigate('Profile')}}
-                      />
+                      />}
                       <DrawerItem
                           icon={({color, size}) => (
                               <Icon name="image"
@@ -58,27 +63,27 @@ const DrawerContent = (props)=>{
                           label="Gallery"
                           onPress={() => {props.navigation.navigate('Gallery')}}
                       />
-                      {/*<DrawerItem*/}
-                      {/*    icon={({color, size}) => (*/}
-                      {/*        <Icon*/}
-                      {/*            name="settings-outline"*/}
-                      {/*            color={color}*/}
-                      {/*            size={size}*/}
-                      {/*        />*/}
-                      {/*    )}*/}
-                      {/*    label="Settings"*/}
-                      {/*    onPress={() => {props.navigation.navigate('SettingsScreen')}}*/}
-                      {/*/>*/}
                       <DrawerItem
                           icon={({color, size}) => (
-                              <Icon
-                                  name="account-check-outline"
+                              <FontAwesome
+                                  name="newspaper-o"
                                   color={color}
                                   size={size}
                               />
                           )}
-                          label="Support"
-                          onPress={() => {props.navigation.navigate('SupportScreen')}}
+                          label="News"
+                          onPress={() => {props.navigation.navigate('News')}}
+                      />
+                      <DrawerItem
+                          icon={({color, size}) => (
+                              <Fontisto
+                                  name="calendar"
+                                  color={color}
+                                  size={size}
+                              />
+                          )}
+                          label="Schedule"
+                          onPress={() => {props.navigation.navigate('Schedule')}}
                       />
                   </Drawer.Section>
               </View>
@@ -93,7 +98,7 @@ const DrawerContent = (props)=>{
                         />
                     )}
                     label="Sign Out"
-                    // onPress={() => {signOut()}}
+                    onPress={() => {dispatch(signOut())}}
                 />
             </Drawer.Section>
         </View>
@@ -112,7 +117,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     caption: {
-        fontSize: 14,
+        fontSize: 12,
         lineHeight: 14,
     },
     row: {

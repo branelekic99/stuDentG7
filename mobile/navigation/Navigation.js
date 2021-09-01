@@ -11,7 +11,7 @@ import News from "../screens/News";
 import DrawerContent from "./DrawerContent";
 import {useSelector} from "react-redux";
 import Profile from "../screens/Profile";
-import Header from "./Header";
+import Schedule from "../screens/Schedule";
 
 
 const AuthStack = createStackNavigator();
@@ -28,33 +28,30 @@ const AuthStackScreen = ()=>(
 )
 const DrawerScreen = ()=>(
     <Drawer.Navigator drawerContent={props=><DrawerContent {...props}/>}>
-        <Drawer.Screen name={"Home"} component={Home} options={({navigation})=>{
-            return{
-                headerShown:true,
-            }
-        }}/>
+        <Drawer.Screen name={"Home"} component={Home} options={{headerShown:false}}/>
         <Drawer.Screen name={"News"} component={News} options={{headerShown:true}}/>
         <Drawer.Screen name={"Gallery"} component={Gallery} options={{headerShown:true}}/>
         <Drawer.Screen name={"Profile"} component={Profile} options={{headerShown:true}}/>
+        <Drawer.Screen name={"Schedule"} component={Schedule} options={{headerShown:true}}/>
     </Drawer.Navigator>
 )
 const RootStack = createStackNavigator();
 
-const RootStackScreen = ({authenticated})=>(
+const RootStackScreen = ({authenticated,guest})=>(
 
-    <RootStack.Navigator headerMode={authenticated?"screen":"none"}>
-        {authenticated? <RootStack.Screen name={"App"} component={DrawerScreen} options={{headerShown:false}
+    <RootStack.Navigator headerMode={authenticated || guest ?"screen":"none"}>
+        {authenticated || guest? <RootStack.Screen name={"App"} component={DrawerScreen} options={{headerShown:false}
             }/>:
             <RootStack.Screen name={"AuthScreen"} component={AuthStackScreen} options={{animationEnabled:false}}/> }
     </RootStack.Navigator>
 )
 
 const Navigation = ()=>{
-    const authenticated = useSelector(state=>state.auth.authenticated);
-
+    const {authenticated,guestMode} = useSelector(state=>state.auth);
+    console.log("change ide");
     return (
         <NavigationContainer>
-            <RootStackScreen authenticated={authenticated}/>
+            <RootStackScreen authenticated={authenticated} guest={guestMode}/>
         </NavigationContainer>
     )
 };
