@@ -117,6 +117,7 @@ const styles = StyleSheet.create({
     },
     newsContent:{
         width:"80%",
+        maxHeight:"70%",
         backgroundColor: 'rgba(86,84,84,0.8)',
         borderBottomRightRadius:20,
         borderBottomLeftRadius:20,
@@ -133,6 +134,6 @@ const styles = StyleSheet.create({
         fontSize:16,
         color:"#fff",
         marginLeft: 20,
-    }
+    },
 })
 export default News;

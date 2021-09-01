@@ -18,7 +18,8 @@ export const sigUp = data=>{
 export const signIn = data =>{
     return async dispatch =>{
         try{
-            data.password = "patka123";
+            console.log("IDE REQUEST");
+            // data.password = "patka123";
             const result = await axios.post( SERVER_ADRESA+ "/patient/signin",data);
             dispatch({
                 type:SIGN_IN,
