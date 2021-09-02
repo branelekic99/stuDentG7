@@ -7,6 +7,7 @@ import {useDispatch,useSelector} from "react-redux";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Fontisto from "react-native-vector-icons/Fontisto";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 const DrawerContent = (props)=>{
     const {authenticated,firstName,lastName,email} = useSelector(state=>state.auth)
@@ -85,6 +86,17 @@ const DrawerContent = (props)=>{
                           label="Schedule"
                           onPress={() => {props.navigation.navigate('Schedule')}}
                       />
+                      <DrawerItem
+                      icon={({color, size}) => (
+                          <MaterialCommunityIcons
+                              name="message-text-clock-outline"
+                              color={color}
+                              size={size}
+                          />
+                      )}
+                      label="Requests"
+                      onPress={() => {props.navigation.navigate('Requests')}}
+                  />
                   </Drawer.Section>
               </View>
             </DrawerContentScrollView>

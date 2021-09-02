@@ -3,23 +3,31 @@ import {View, Alert,Text,StyleSheet,TextInput,TouchableOpacity} from "react-nati
 import {Modal,Provider,Portal} from "react-native-paper";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {ASYNC_STORAGE_KEY} from "../constants/variables";
+import {ASYNC_STORAGE_KEY, SERVER_ADRESA} from "../constants/variables";
 
-const MakeAppointment = ({item,onClose,show}) => {
+const MakeAppointment = ({item,onClose,show,refreshData}) => {
 
     const [descriptionValue,setDescriptionValue] = useState("");
 
     const handleRequest = async ()=>{
         const {id} = item;
-        console.log(id);
-        console.log(descriptionValue);
-        // try{
-        //     const token = await AsyncStorage.getItem(ASYNC_STORAGE_KEY);
-        //     await axios.put(`/admin/reserve/apointment/${id}`)
-        //
-        // }catch (err){
-        //     console.log(err);
-        // }
+        try{
+            const data = {
+                description:descriptionValue,
+            }
+            const token = await AsyncStorage.getItem(ASYNC_STORAGE_KEY);
+            await axios.put(SERVER_ADRESA + `/admin/reserve/apointment/${id}`,data,{
+                headers:{
+                    'Content-Type':"application/json",
+                    "x-access-token": token,
+                }
+            });
+            onClose();
+            refreshData();
+
+        }catch (err){
+            console.log(err);
+        }
     };
 
     return (
@@ -33,7 +41,7 @@ const MakeAppointment = ({item,onClose,show}) => {
                     <View style={styles.modalContent}>
                         <View style={styles.description}>
                             <Text style={styles.descriptionTitle}>Description</Text>
-                            <TextInput style={styles.descriptionInput} multiline={true} onChangeText={setDescriptionValue}/>
+                            <TextInput style={styles.descriptionInput} multiline={true} onChangeText={setDescriptionValue} placeholder={"Enter optional message.."}/>
                         </View>
                         <View style={styles.actionButtonContainer}>
                             <TouchableOpacity  style={styles.actionButton} onPress={handleRequest}><Text>Send request</Text></TouchableOpacity>
@@ -71,8 +79,8 @@ const styles = StyleSheet.create({
         alignItems:"center"
     },
     description:{
-        width:"100%",
-        borderBottomWidth:2,
+        width:"100%"
+        // borderBottomWidth:2,
     },
     descriptionTitle:{
         fontSize:20,

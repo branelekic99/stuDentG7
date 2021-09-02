@@ -33,7 +33,7 @@ const Schedule = () => {
             setError("Something went wrong!")
         }
     };
-    const fetchAvailableAppointments = async(id)=>{
+    const fetchAvailableAppointments = async(id=selectedValue)=>{
         try{
             setIsLoading(true);
             const token = await AsyncStorage.getItem(ASYNC_STORAGE_KEY);
@@ -106,7 +106,7 @@ const Schedule = () => {
                         </View>
                     </View>
                 }} keyExtractor={item=>item.id.toString()}/>}
-            <MakeAppointment show={isModalVisible} onClose={handleModalClose} item={selectedAppointment} />
+            <MakeAppointment show={isModalVisible} onClose={handleModalClose} item={selectedAppointment} refreshData={fetchAvailableAppointments}/>
         </View>
     );
 };
