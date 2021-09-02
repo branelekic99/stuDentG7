@@ -9,7 +9,6 @@ module.exports = function (app) {
    
     app.post("/patient/create/request", [
         authJwt.verifyToken, 
-        verifyPatient.checkIfPatientExistsFromBody, 
         verifyRequest.verifyApointmentForRequest
     ], requestController.create);
 
