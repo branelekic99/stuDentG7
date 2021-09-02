@@ -4,8 +4,6 @@ const { verifyNews } = require("../middleware/verifyNews");
 
 module.exports = function (app) {
    
-
-
     app.get("/get/news/paginated", newsController.getNewsPaginated);
 
     app.get("/get/news/:id", [verifyNews.checkIfNewsExists], newsController.getNews);

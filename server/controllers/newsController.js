@@ -74,11 +74,11 @@ exports.update = async (req, res) => {
             if(fields != null && fields.title != null && fields.content != null) {
                 if(fields.content[0].length <= 5000) {
                     News.findByPk(req.params.id).then(news => {
-                        if(fields.imageUrl == null) {
-                            fs.unlinkSync(news.imageUrl);
-                        } 
                         if(files.image != null) {
                             try {
+                                if(news.imageUrl != null) {
+                                    fs.unlinkSync(news.imageUrl);
+                                } 
                                 const magic = new mmm.Magic(mmm.MAGIC_MIME_TYPE);
                                 magic.detectFile(files.image[0].path, function(err, result) {
                                     if(result.startsWith('image')) {
@@ -107,7 +107,6 @@ exports.update = async (req, res) => {
                         } else { 
                             news.title = fields.title[0];
                             news.content = fields.content[0];
-                            news.imageUrl = (fields.imageUrl != null ? fields.imageUrl[0] : null);
                             news.save()
                             
                             res.send(news);
