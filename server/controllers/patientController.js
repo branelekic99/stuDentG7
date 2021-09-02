@@ -81,16 +81,15 @@ exports.update = async (req, res) => {
     try{
         let form = new multiparty.Form();
         form.parse(req, function(err, fields, files) {
-            if(fields != null && fields.firstName != null && fields.lastName != null && fields.email != null && fields.phoneNumber != null && fields.age != null) {
-                if(fields.imageUrl == null) {
-                    Patient.findOne({where: {
-                        id: req.params.id
-                    }}).then(patient => {
-                        fs.unlinkSync(patient.imageUrl);
-                    });
-                }                
+            if(fields != null && fields.firstName != null && fields.lastName != null && fields.email != null && fields.phoneNumber != null && fields.age != null) {             
                 if(files.image != null) {
                     try {
+                        Patient.findOne({where: {
+                            id: req.params.id
+                        }}).then(patient => {
+                            if(patient.imageUrl != null)
+                                fs.unlinkSync(patient.imageUrl);
+                        });
                         const magic = new mmm.Magic(mmm.MAGIC_MIME_TYPE);
                         magic.detectFile(files.image[0].path, function(err, result) {
                             if(result.startsWith('image')) {
@@ -143,8 +142,7 @@ exports.update = async (req, res) => {
                         lastName: fields.lastName[0],
                         email: fields.email[0],
                         phoneNumber: fields.phoneNumber[0],
-                        age: fields.age[0],
-                        imageUrl: (fields.imageUrl != null ? fields.imageUrl[0] : null)
+                        age: fields.age[0]
                     }, {where: {
                         id: req.params.id
                     }}).then(
@@ -170,6 +168,25 @@ exports.update = async (req, res) => {
                 res.status(401).send({ message: "First name, last name, email, phone number and age are required" });
             }
         });
+    } catch(err) {
+        res.status(500).send({ message: err.message });
+    }
+};
+
+exports.removeProfileImage = async (req, res) => { 
+    try {
+        const patient = await Patient.findOne({where: {
+            id: req.userId
+        }});
+
+        if(patient.imageUrl != null) {
+            fs.unlinkSync(patient.imageUrl);
+        }
+        
+        patient.imageUrl = null;
+        patient.save();
+
+        res.send({message: "Profile image removed!"});
     } catch(err) {
         res.status(500).send({ message: err.message });
     }
