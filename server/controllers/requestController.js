@@ -12,7 +12,7 @@ const Op = db.Sequelize.Op;
 exports.create = async (req, res) => {
     try {
         const request = await Request.create({
-            patientId: req.body.patientId,
+            patientId: req.userId,
             apointmentId: req.body.apointmentId,
             description: req.body.description,
             approved: false
