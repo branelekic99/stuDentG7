@@ -26,7 +26,7 @@ exports.addImage = async (req, res) => {
                                 fs.copyFileSync(files.image[0].path, location);
 
                                 Image.create({
-                                    imageUrl: 'http://127.0.0.1:8000' + '/' + location
+                                    imageUrl: location
                                 }).then(
                                     image => {
                                         res.send(image);

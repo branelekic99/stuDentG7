@@ -27,7 +27,7 @@ exports.create = async (req, res) => {
                                         News.create({
                                             title: fields.title[0],
                                             content: fields.content[0],
-                                            imageUrl: 'http://127.0.0.1:8000' + '/' + location
+                                            imageUrl: location
                                         }).then(
                                             news => {
                                                 res.send(news);
@@ -76,6 +76,9 @@ exports.update = async (req, res) => {
                     News.findByPk(req.params.id).then(news => {
                         if(files.image != null) {
                             try {
+                                if(news.imageUrl != null) {
+                                    fs.unlinkSync(news.imageUrl);
+                                } 
                                 const magic = new mmm.Magic(mmm.MAGIC_MIME_TYPE);
                                 magic.detectFile(files.image[0].path, function(err, result) {
                                     if(result.startsWith('image')) {
@@ -87,7 +90,7 @@ exports.update = async (req, res) => {
 
                                             news.title = fields.title[0];
                                             news.content = fields.content[0];
-                                            news.imageUrl = 'http://127.0.0.1:8000' + '/' + location;
+                                            news.imageUrl = location;
                                             news.save()
                         
                                             res.send(news);
@@ -104,7 +107,6 @@ exports.update = async (req, res) => {
                         } else { 
                             news.title = fields.title[0];
                             news.content = fields.content[0];
-
                             news.save()
                             
                             res.send(news);
