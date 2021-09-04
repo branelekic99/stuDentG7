@@ -82,7 +82,8 @@ const Profile = ({navigation}) => {
             Alert.alert("Error","Something went wrong! Please try again.",[{text:"OK"}])
             console.log(err);
         }
-    }
+    };
+
     const handleUpdatePassword = ()=>{
         setShowChangePassword(true);
     };

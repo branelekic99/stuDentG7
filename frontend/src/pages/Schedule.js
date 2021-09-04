@@ -94,26 +94,32 @@ const Schedule = () => {
         setDeleteItem(null);
     }
     return (
-        <div>
-            <h2>Schedules</h2>
-            <Tooltip title={"Create schedule"} placement={"right"}>
-                <PlusCircleOutlined style={{ fontSize: '32px', color: '#08c' }} onClick={handleCreateSchedule} />
-            </Tooltip>
+        <div className={"container-fluid"}>
+            <div className={"row pt-3 pb-2 sv-border-bottom"}>
+                <div className={"col-12 col-md-12 col-lg-3 col-xl-3 bl-schedule"}>
+                    <button className={"btn btn-primary w-100"} onClick={handleCreateSchedule}>Create schedule</button>
+                </div>
+            </div>
+
+
             <CustomModal show={showModal} handleClose={handleClose} title={"Create Schedule"} submit={handleSubmit}>
                 <ScheduleCreate form_ref={form_ref} categories={categories}/>
             </CustomModal>
+
             <div>
-                <label>Choose category</label>
-                <Select
-                    showSearch
-                    style={{ width: 200,zIndex:5 }}
-                    placeholder="Select a person"
-                    optionFilterProp="children"
-                    defaultValue={selectedCategory}
-                    onChange={handleSelectChange}
-                >
-                    {selectData}
-                </Select>
+                <div className={"bl-schedule-select"}>
+                    <label className={"bl-select-label"}>Choose category</label>
+                    <Select
+                        showSearch
+                        style={{ width: 200,zIndex:5 }}
+                        placeholder="Select a person"
+                        optionFilterProp="children"
+                        defaultValue={selectedCategory}
+                        onChange={handleSelectChange}
+                    >
+                        {selectData}
+                    </Select>
+                </div>
                 <Table dataSource={schedules}>
                     <Column title="Start time" dataIndex="startTime" key="startTime" render={(value)=>{
                         return new Date(value).toLocaleString()
@@ -126,10 +132,11 @@ const Schedule = () => {
                                 return categories.find(category=>category.id === value)?.name
                             }} />
                     <Column title={"Actions"} render={(value,object)=><Tooltip title={"Delete"} placement={"top"}>
-                        <DeleteOutlined key="delete" onClick={handleDeleteModalShow.bind(this,object)}/>
+                        <DeleteOutlined key="delete" onClick={handleDeleteModalShow.bind(this,object)} size={40} />
                     </Tooltip>}/>
                 </Table>
             </div>
+
             <Confirmation show={showDeleteModal} handleClose={handleDeleteModalClose} confirm={handleDelete}/>
         </div>
     );

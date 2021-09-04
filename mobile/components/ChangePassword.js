@@ -2,8 +2,6 @@ import React,{useState}from 'react';
 import {View, Alert,Text,StyleSheet,TextInput,TouchableOpacity} from "react-native";
 import {Modal,Provider,Portal} from "react-native-paper";
 import {useDispatch} from "react-redux";
-import FontAwesome from "react-native-vector-icons/FontAwesome";
-import Feather from "react-native-vector-icons/Feather";
 import {updateUserPassword} from "../redux-store/actions/auth";
 
 const ChangePassword = ({show=false,onClose,id=0}) => {

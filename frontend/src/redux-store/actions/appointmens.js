@@ -1,5 +1,6 @@
 import api from "../../api/api";
 import {CANCEL_RESERVATION, GET_APPOINTMENTS, GET_RESERVED_APPOINTMENTS, MAKE_RESERVATION} from "./type";
+import {notification} from "antd";
 
 export const getAvailableAppointmentsForCategory = (category_id)=>{
     return async (dispatch)=>{
@@ -33,6 +34,10 @@ export const makeReservation = (id,data)=>{
             await api.put(`/admin/reserve/apointment/${id}`,data);
             dispatch({
                 type:MAKE_RESERVATION
+            })
+            notification.open({
+                message:"Appointment reserved",
+                description:"Appointment has been successfully reserved!"
             })
         }catch (err){
             console.log(err);

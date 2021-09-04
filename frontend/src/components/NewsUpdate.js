@@ -15,8 +15,6 @@ const NewsUpdate = ({form_ref}) => {
         }
     });
 
-
-
     const onsubmit = data=>{
         const formData = new FormData();
         formData.append("title",data.title)

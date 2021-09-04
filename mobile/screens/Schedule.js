@@ -4,6 +4,7 @@ import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {Picker} from "@react-native-picker/picker";
 import {ASYNC_STORAGE_KEY, SERVER_ADRESA} from "../constants/variables";
+import MakeAppointment from "../components/MakeAppointments";
 
 const Schedule = () => {
     const [categories, setCategories] = useState([]);
@@ -11,6 +12,9 @@ const Schedule = () => {
     const [error,setError] = useState("");
     const [selectedValue,setSelectedValue] = useState("");
     const [isLoading,setIsLoading] = useState(false);
+
+    const [isModalVisible,setIsModalVisible] = useState(false);
+    const [selectedAppointment,setSelectedAppointments] = useState(null);
 
     const fetchCategories = async()=>{
         try{
@@ -29,7 +33,7 @@ const Schedule = () => {
             setError("Something went wrong!")
         }
     };
-    const fetchAvailableAppointments = async(id)=>{
+    const fetchAvailableAppointments = async(id=selectedValue)=>{
         try{
             setIsLoading(true);
             const token = await AsyncStorage.getItem(ASYNC_STORAGE_KEY);
@@ -54,6 +58,14 @@ const Schedule = () => {
         if(selectedValue)
             fetchAvailableAppointments(selectedValue);
     },[selectedValue]);
+
+    const handleReservation = (item) =>{
+        setSelectedAppointments(item);
+        setIsModalVisible(true);
+    };
+    const handleModalClose = ()=>{
+        setIsModalVisible(false);
+    }
     return (
         <View style={styles.container}>
             <View style={styles.pickerContainer}>
@@ -88,12 +100,13 @@ const Schedule = () => {
                             <Text style={styles.text}>{new Date(item.startTime).toLocaleTimeString()}</Text>
                         </View>
                         <View style={styles.action}>
-                            <TouchableOpacity style={styles.actionButton}>
+                            <TouchableOpacity style={styles.actionButton} onPress={handleReservation.bind(this,item)}>
                                 <Text style={styles.actionText}>Rezervisi</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
                 }} keyExtractor={item=>item.id.toString()}/>}
+            <MakeAppointment show={isModalVisible} onClose={handleModalClose} item={selectedAppointment} refreshData={fetchAvailableAppointments}/>
         </View>
     );
 };
@@ -117,6 +130,7 @@ const styles = StyleSheet.create({
     appointment:{
         margin:10,
         elevation:1,
+        backgroundColor: "#fff",
         borderRadius:5,
         padding:10,
         justifyContent:"center",

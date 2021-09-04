@@ -59,9 +59,9 @@ const SignIn = ({navigation}) => {
 
     const {colors} = useTheme();
 
-    // useEffect(()=>{
-    //     dispatch(signIn({email:"branisalekic60@gmail.com",password:"123"}));
-    // },[]);
+    useEffect(()=>{
+        dispatch(signIn({email:"branisalekic60@gmail.com",password:"123"}));
+    },[]);
 
     const handleSignIn = async ()=>{
         try{

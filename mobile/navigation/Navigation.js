@@ -12,7 +12,7 @@ import DrawerContent from "./DrawerContent";
 import {useSelector} from "react-redux";
 import Profile from "../screens/Profile";
 import Schedule from "../screens/Schedule";
-
+import Requests from "../screens/Requests";
 
 const AuthStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -33,6 +33,7 @@ const DrawerScreen = ()=>(
         <Drawer.Screen name={"Gallery"} component={Gallery} options={{headerShown:true}}/>
         <Drawer.Screen name={"Profile"} component={Profile} options={{headerShown:true}}/>
         <Drawer.Screen name={"Schedule"} component={Schedule} options={{headerShown:true}}/>
+        <Drawer.Screen name={"Requests"} component={Requests} options={{headerShown:true}}/>
     </Drawer.Navigator>
 )
 const RootStack = createStackNavigator();

@@ -38,8 +38,6 @@ const News = () => {
     const offset = useSelector(state => state.news.offset);
     const count = useSelector(state => state.news.count);
     const re_fetch = useSelector(state => state.news.reload);
-    console.log("offset", offset);
-    console.log("count", count);
 
     const fetch_data = async (offset = 0) => {
         setShowLoader(true);
@@ -99,9 +97,15 @@ const News = () => {
         setDeleteModal(true);
     }
     const handleNextClick = () => {
+        console.log(offset)
         fetch_data(offset + 10);
     }
     const handlePreviousClick = () => {
+        if(offset === 0) {
+            console.log("prosao")
+            return;
+        };
+        console.log(offset)
         fetch_data(offset - 10);
     }
     if (showLoader) {
@@ -110,12 +114,22 @@ const News = () => {
     return (
         <>
             <div className={"container-fluid"}>
-                <div className={"row pt-5 pb-2 sv-border-bottom"}>
-                    <div className={"col-12 col-md-12 col-lg-3 col-xl-3"}>
-                        <Tooltip title={"Create news"} placement={"right"}>
-                            <button className={"btn btn-primary w-100"} onClick={handleAddNews}> Add news <FaPlus/>
+
+                <div className={"sv-border-bottom bl-news-header"}>
+                    <div className={"bl-news-actions"}>
+                            <button className={"btn btn-primary w-30"} onClick={handleAddNews}>Create News
                             </button>
-                        </Tooltip>
+                        <div style={{display: "flex"}}>
+                            <Tooltip title={"Previous page"} placement={"right"}>
+                                <CaretLeftOutlined style={{fontSize: '32px', color: '#08c'}}
+                                                           onClick={handlePreviousClick}/>
+                            </Tooltip>
+
+                            <Tooltip title={"Next page"} placement={"right"}>
+                                <CaretRightOutlined style={{fontSize: '32px', color: '#08c'}}
+                                                            onClick={handleNextClick}/>
+                            </Tooltip>
+                        </div>
                     </div>
                 </div>
 
@@ -126,7 +140,7 @@ const News = () => {
                                 {<img  className={"sv-image-card"} src={item.imageUrl ? item.imageUrl : default_img}/>}
                                 <div className="card-body">
                                     <h5>{item.title}</h5>
-                                    <p>{item.content}</p>
+                                    <p>{item.content?.length > 40?item.content.substr(0,40) + "...":item.content}</p>
                                 </div>
                                 <div className={"card-footer"}>
                                     <div className={"row"}>
@@ -143,24 +157,6 @@ const News = () => {
                     ))}
                 </div>
             </div>
-
-            <div style={{display: "flex"}}>
-                <div style={{display: "flex"}}>
-                    {offset > 10 && (
-                        <Tooltip title={"Previous page"} placement={"right"}>
-                            <CaretLeftOutlined style={{fontSize: '32px', color: '#08c'}}
-                                               onClick={handlePreviousClick}/>
-                        </Tooltip>
-                    )}
-                    {offset + 10 < count && (
-                        <Tooltip title={"Next page"} placement={"right"}>
-                            <CaretRightOutlined style={{fontSize: '32px', color: '#08c'}}
-                                                onClick={handleNextClick}/>
-                        </Tooltip>
-                    )}
-                </div>
-            </div>
-
 
             <CustomModal show={showModal} handleClose={handleClose} title={"News create"} submit={handleSubmit}>
                 <NewsCreate form_ref={form_ref}/>

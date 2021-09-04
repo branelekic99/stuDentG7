@@ -6,6 +6,7 @@ import {
     GET_CATEGORIES,
     GET_SCHEDULE_BY_CATEGORY
 } from "./type";
+import {notification} from "antd";
 
 
 export const getCategories = ()=>{
@@ -42,6 +43,10 @@ export const createSchedule = data =>{
             dispatch({
                 type:CREATE_SCHEDULE,
             })
+            notification.open({
+                message:"Schedule created",
+                description:"New schedule has been successfully created!"
+            })
         }catch (err){
           dispatch({
               type:CREATE_SCHEDULE_ERROR,
@@ -56,6 +61,10 @@ export const deleteSchedule = (id)=>{
             await api.delete(`/admin/delete/schedule/${id}`);
             dispatch({
                 type:DELETE_SCHEDULE
+            })
+            notification.open({
+                message:"Schedule deleted",
+                description:"Schedule has been successfully deleted!"
             })
         }catch (err){
             console.log(err);
