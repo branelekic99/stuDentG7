@@ -4,6 +4,7 @@ import {useDispatch} from "react-redux";
 import {Form,Alert} from "react-bootstrap";
 import {REQUIRED_FIELD} from "../constants/messages";
 import {changePassword} from "../redux-store/actions/auth";
+import {notification} from "antd";
 
 const ChangePassword = ({form_ref,handleClose}) => {
     const dispatch = useDispatch();
@@ -18,6 +19,10 @@ const ChangePassword = ({form_ref,handleClose}) => {
         try{
             delete data.newPassword2;
             await dispatch(changePassword(data));
+            notification.open({
+                message:"Password changed",
+                description:"Your password has been successfully changed!"
+            })
             handleClose();
         }catch (err){
             setPasswordError(err.message);

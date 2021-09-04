@@ -5,31 +5,9 @@ import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {ASYNC_STORAGE_KEY, SERVER_ADRESA} from "../constants/variables";
 
-const MakeAppointment = ({item,onClose,show,refreshData}) => {
+const RequestModal = ({item,onClose,show}) => {
 
     const [descriptionValue,setDescriptionValue] = useState("");
-
-    const handleRequest = async ()=>{
-        const {id} = item;
-        try{
-            const data = {
-                description:descriptionValue,
-                apointmentId:id,
-            }
-            const token = await AsyncStorage.getItem(ASYNC_STORAGE_KEY);
-            const result = await axios.post(SERVER_ADRESA + '/patient/create/request',data,{
-                headers:{
-                    'Content-Type':"application/json",
-                    "x-access-token": token,
-                }
-            });
-            onClose();
-            refreshData();
-
-        }catch (err){
-            console.log(err);
-        }
-    };
 
     return (
         <Provider>
@@ -42,11 +20,11 @@ const MakeAppointment = ({item,onClose,show,refreshData}) => {
                     <View style={styles.modalContent}>
                         <View style={styles.description}>
                             <Text style={styles.descriptionTitle}>Description</Text>
-                            <TextInput style={styles.descriptionInput} multiline={true} onChangeText={setDescriptionValue} placeholder={"Enter optional message.."}/>
+                            {/*<TextInput style={styles.descriptionInput} multiline={true} onChangeText={setDescriptionValue} placeholder={"Enter optional message.."}/>*/}
                         </View>
                         <View style={styles.actionButtonContainer}>
-                            <TouchableOpacity  style={styles.actionButton} onPress={handleRequest}><Text>Send request</Text></TouchableOpacity>
-                            <TouchableOpacity style={{...styles.actionButton,backgroundColor:"#ffc75e"}} onPress={onClose}><Text>Close</Text></TouchableOpacity>
+                            <TouchableOpacity  style={styles.actionButton}><Text>Send request</Text></TouchableOpacity>
+                            <TouchableOpacity style={{...styles.actionButton,backgroundColor:"#ffc75e"}}><Text>Close</Text></TouchableOpacity>
                         </View>
                     </View>
                 </Modal>
@@ -99,4 +77,4 @@ const styles = StyleSheet.create({
     },
 
 })
-export default MakeAppointment;
+export default RequestModal;

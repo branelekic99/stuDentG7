@@ -73,13 +73,11 @@ const Gallery = () => {
     return (
         <>
             <div className={"container-fluid"}>
-                <div className={"row pt-5 pb-2 sv-border-bottom"}>
+                <div className={"row pt-3 pb-2 sv-border-bottom"}>
                     <div className={"col-12 col-md-12 col-lg-3 col-xl-3"}>
-                        <Tooltip title={"Create news"} placement={"right"}>
                             <button className={"btn btn-primary w-100"} onClick={handleAddImage}> Add new
-                                image <FaPlus/>
+                                image
                             </button>
-                        </Tooltip>
                     </div>
                 </div>
 

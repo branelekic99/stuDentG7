@@ -8,7 +8,6 @@ const NewsCreate = ({form_ref}) => {
     const dispatch = useDispatch();
     const {register,formState:{errors},handleSubmit} = useForm();
 
-
     const onsubmit = data=>{
         const formData = new FormData();
         formData.append("title",data.title)

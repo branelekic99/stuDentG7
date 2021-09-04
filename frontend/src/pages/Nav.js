@@ -23,7 +23,7 @@ const NavBar = () => {
     const authenticated = useSelector(state => state.auth.authenticated);
     const auth_status = useSelector(state => state.auth.auth_status);
     const superUser = useSelector(state => state.auth.is_superuser);
-    console.log(superUser)
+
     const [showPassword, setShowPassword] = useState(false);
     const [showCreateAdmin, setShowCreateAdmin] = useState(false);
 
@@ -75,21 +75,21 @@ const NavBar = () => {
         <>
             <Navbar expand="lg" activeKey={activeLink}>
                 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="m-auto m-0">
+                <Navbar.Collapse id="basic-navbar-nav" >
+                    <Nav className={"bl-navbar"}>
                         <Nav.Link eventKey={"/"}><Link to={"/"}>Home</Link></Nav.Link>
                         <Nav.Link eventKey={"/news"}><Link to={"/news"}>News</Link></Nav.Link>
                         <Nav.Link eventKey={"/gallery"}><Link to={"/gallery"}>Gallery</Link></Nav.Link>
                         <Nav.Link eventKey={"/schedule"}><Link to={"/schedule"}>Schedule</Link></Nav.Link>
                         <Nav.Link eventKey={"/appointment"}><Link to={"/appointment"}>Appointments</Link></Nav.Link>
                         <Nav.Link eventKey={"/requests"}><Link to={"/requests"}>Requests</Link></Nav.Link>
-                        <NavDropdown title={<FaUserCircle/>} id="basic-nav-dropdown" className={"dropdown-right"}>
-                            <NavDropdown.Item onClick={() => setShowCreateAdmin(true)}>Add user</NavDropdown.Item>
-                            <NavDropdown.Item onClick={() => setShowPassword(true)}>Change password</NavDropdown.Item>
-                            <NavDropdown.Divider/>
-                            <NavDropdown.Item onClick={handleLogOut}>Logout</NavDropdown.Item>
-                        </NavDropdown>
                     </Nav>
+                    <NavDropdown title={<FaUserCircle size={30} color={"white"}/>} id="basic-nav-dropdown" className={"dropdown-right bl-usericon"}>
+                        {superUser && <NavDropdown.Item onClick={() => setShowCreateAdmin(true)}>Add user</NavDropdown.Item>}
+                        <NavDropdown.Item onClick={() => setShowPassword(true)}>Change password</NavDropdown.Item>
+                        <NavDropdown.Divider/>
+                        <NavDropdown.Item onClick={handleLogOut}>Logout</NavDropdown.Item>
+                    </NavDropdown>
                 </Navbar.Collapse>
             </Navbar>
             <CustomModal show={showPassword} handleClose={handleChangePasswordClose}

@@ -1,5 +1,6 @@
 import api from "../../api/api";
 import {ADD_IMAGE, DELETE_IMAGE, GET_GALLERY} from "./type";
+import {notification} from "antd";
 
 export const getGallery = ()=>{
     return async dispatch =>{
@@ -22,6 +23,10 @@ export const addImage = (data)=>{
             dispatch({
                 type:ADD_IMAGE,
             })
+            notification.open({
+                message:"Image created",
+                description:"New image has been successfully added!"
+            })
         }catch (err){
             console.log(err);
 
@@ -35,6 +40,10 @@ export const deleteImage = (id) =>{
             await api.delete(`/delete/gallery/image/${id}`);
             dispatch({
                 type:DELETE_IMAGE
+            })
+            notification.open({
+                message:"Image deleted",
+                description:"Image has been successfully deleted!"
             })
         }catch (err){
             console.log(err)

@@ -72,43 +72,47 @@ const ScheduleCreate = ({form_ref,categories}) => {
         return current && current < new Date();
     }
     return (
-        <div>
+
             <form onSubmit={handleSubmit} ref={form_ref}>
-                <div>
-                    <p>{error_message}</p>
+                <span>{error_message}</span>
+                <div className={"bl-schedule-container"}>
+                    <div className={"bl-box"}>
+                        <label style={{fontSize:18}}>Choose category</label>
+                        <Select
+                            showSearch
+                            style={{ width: 500,zIndex:5 }}
+                            placeholder="Select a person"
+                            optionFilterProp="children"
+                            onChange={handleSelectChange}
+                            getPopupContainer={node => node.parentNode}
+                            size={"large"}
+                        >
+                            {select_data}
+                        </Select>
+                        <span>{selectError}</span>
+                    </div>
+
+                    <div className={"bl-box"}>
+                        <label style={{fontSize:18}}>Start time</label>
+                        <Space direction={"vertical"} size={12}>
+                            <DatePicker showTime onChange={startDateOnChange}   getPopupContainer={node => node.parentNode}
+                                        disabledDate={min_date}    size={"large"}
+                                        style={{width:"500px"}}/>
+                        </Space>
+                        <span>{startDateError}</span>
+                    </div>
+
+                    <div className={"bl-box"}>
+                        <label style={{fontSize:18}}>End time</label>
+                        <Space direction={"vertical"} size={12}>
+                            <DatePicker showTime onChange={endDateOnChange}   getPopupContainer={node => node.parentNode}
+                                        disabledDate={min_date}    size={"large"}
+                                        style={{width:"500px"}}/>
+                        </Space>
+                        <p>{endDateError}</p>
+                    </div>
                 </div>
-            <div>
-                <label>Choose category</label>
-                <Select
-                    showSearch
-                    style={{ width: 200,zIndex:5 }}
-                    placeholder="Select a person"
-                    optionFilterProp="children"
-                    onChange={handleSelectChange}
-                    getPopupContainer={node => node.parentNode}
-                >
-                    {select_data}
-                </Select>
-                <p>{selectError}</p>
-            </div>
-            <div>
-                <label>Pocetak rada</label>
-                <Space direction={"vertical"} size={12}>
-                    <DatePicker showTime onChange={startDateOnChange}   getPopupContainer={node => node.parentNode}
-                    disabledDate={min_date} />
-                </Space>
-                <p>{startDateError}</p>
-            </div>
-            <div>
-                <label>Kraj rada</label>
-                <Space direction={"vertical"} size={12}>
-                    <DatePicker showTime onChange={endDateOnChange}   getPopupContainer={node => node.parentNode}
-                                disabledDate={min_date} />
-                </Space>
-                <p>{endDateError}</p>
-            </div>
             </form>
-        </div>
     );
 };
 

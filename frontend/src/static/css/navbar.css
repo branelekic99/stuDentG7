@@ -1,6 +1,7 @@
 body .navbar  {
     background-color: var(--light-blue);
     padding: 0.5rem;
+    height: 10vh;
 }
 
 body .navbar-collapse .navbar-nav .nav-link , body .navbar-collapse .navbar-nav .nav-link a {
@@ -39,4 +40,7 @@ body .nav-link a:hover {
 
 body .dropdown-menu {
     right: 10%;
+}
+.bl-navbar{
+    width: 100%;
 }

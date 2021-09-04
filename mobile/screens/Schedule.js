@@ -130,6 +130,7 @@ const styles = StyleSheet.create({
     appointment:{
         margin:10,
         elevation:1,
+        backgroundColor: "#fff",
         borderRadius:5,
         padding:10,
         justifyContent:"center",
