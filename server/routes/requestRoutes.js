@@ -27,7 +27,9 @@ module.exports = function (app) {
 
     app.get("/admin/get_unapproved_requests", [authJwt.verifyToken], requestController.getFutureRequests);
     
-    app.get("/get_requests/patient", [authJwt.verifyToken, verifyPatient.checkIfPatientExists], requestController.getPatientRequests);
+    app.get("/get/unapproved/requests/patient", [authJwt.verifyToken, verifyPatient.checkIfPatientExists], requestController.getPatientUnapprovedRequests);
+    
+    app.get("/get/approved/requests/patient", [authJwt.verifyToken, verifyPatient.checkIfPatientExists], requestController.getPatientApprovedRequests);
 
     app.get("/get/request/:id", [authJwt.verifyToken, verifyRequest.verifyRequestExists], requestController.getRequest);
 

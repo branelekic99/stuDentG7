@@ -151,12 +151,38 @@ exports.getFutureRequests = async (req, res) => {
     }
 }
 
-exports.getPatientRequests = async (req, res) => {
+exports.getPatientUnapprovedRequests = async (req, res) => {
     try {
         const request = await Request.findAll({
             where: {
                 patientId: req.userId,
                 approved: false
+            },
+            include: {
+                model: Apointment,
+                order: [
+                    ['startTime', 'ASC']
+                ], 
+                where: {
+                    startTime: {
+                        [Op.gte]: Date.now()
+                    },
+                }
+            }
+        });
+        
+        res.send(request);
+    } catch(err) {
+        res.status(500).send({ message: err.message });
+    }
+}
+
+exports.getPatientApprovedRequests = async (req, res) => {
+    try {
+        const request = await Request.findAll({
+            where: {
+                patientId: req.userId,
+                approved: true
             },
             include: {
                 model: Apointment,
