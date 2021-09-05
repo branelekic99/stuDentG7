@@ -19,6 +19,7 @@ export const signIn = data =>{
     return async dispatch =>{
         try{
             console.log("IDE REQUEST");
+            data.email = "kicic.jelena@gmail.com";
             data.password = "patka123";
             const result = await axios.post( SERVER_ADRESA+ "/patient/signin",data);
             dispatch({
@@ -57,8 +58,6 @@ export const signOut = ()=>{
 export const updateProfile = (data,userId) =>{
     return async dispatch =>{
         try{
-            console.log("ovo je data",data);
-            console.log("ovo je user id",userId);
             const token = await AsyncStorage.getItem(ASYNC_STORAGE_KEY);
            const result = await axios.put(SERVER_ADRESA + `/patient/update/${userId}`,data,{
                 headers:{
@@ -86,7 +85,6 @@ export const getUserById = (id)=>{
                     "x-access-token": token,
                 }
             });
-            console.log(result.data)
             dispatch({
                 type:GET_PROFILE,
                 payload:result.data,
