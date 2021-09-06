@@ -6,11 +6,10 @@ import {ASYNC_STORAGE_KEY,SERVER_ADRESA} from "../../constants/variables";
 export const sigUp = data=>{
     return async dispatch =>{
         try{
-            console.log("DOSAM SAM OVDE SA DATOM",data);
-            // const result = await axios.post("/patient/signup",data);
-            // console.log(result);
+            const result = await axios.post(SERVER_ADRESA + "/patient/signup",data);
+
         }catch (err){
-            console.log(err);
+            throw err;
         }
     }
 };
@@ -18,9 +17,9 @@ export const sigUp = data=>{
 export const signIn = data =>{
     return async dispatch =>{
         try{
-            console.log("IDE REQUEST");
-            data.email = "kicic.jelena@gmail.com";
-            data.password = "patka123";
+            // console.log("IDE REQUEST");
+            // data.email = "kicic.jelena@gmail.com";
+            // data.password = "patka123";
             const result = await axios.post( SERVER_ADRESA+ "/patient/signin",data);
             dispatch({
                 type:SIGN_IN,
@@ -55,6 +54,11 @@ export const signOut = ()=>{
         }
     }
 };
+export const questExit = ()=>{
+    return{
+        type:LOG_OUT
+    }
+}
 export const updateProfile = (data,userId) =>{
     return async dispatch =>{
         try{

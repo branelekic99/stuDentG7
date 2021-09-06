@@ -2,7 +2,7 @@ import React from "react";
 import {View,StyleSheet} from "react-native";
 import {DrawerContentScrollView,DrawerItem} from "@react-navigation/drawer";
 import {Avatar,Title,Caption,Drawer,useTheme} from "react-native-paper";
-import {signOut} from "../redux-store/actions/auth";
+import {signOut,questExit} from "../redux-store/actions/auth";
 import {useDispatch,useSelector} from "react-redux";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from "react-native-vector-icons/FontAwesome";
@@ -86,7 +86,7 @@ const DrawerContent = (props)=>{
                           label="Schedule"
                           onPress={() => {props.navigation.navigate('Schedule')}}
                       />
-                      <DrawerItem
+                      {authenticated?<DrawerItem
                       icon={({color, size}) => (
                           <MaterialCommunityIcons
                               name="message-text-clock-outline"
@@ -96,12 +96,12 @@ const DrawerContent = (props)=>{
                       )}
                       label="Requests"
                       onPress={() => {props.navigation.navigate('Requests')}}
-                  />
+                  />:<View></View>}
                   </Drawer.Section>
               </View>
             </DrawerContentScrollView>
             <Drawer.Section style={styles.bottomDrawerSection}>
-                <DrawerItem
+                {authenticated?<DrawerItem
                     icon={({color, size}) => (
                         <Icon
                             name="exit-to-app"
@@ -111,7 +111,17 @@ const DrawerContent = (props)=>{
                     )}
                     label="Sign Out"
                     onPress={() => {dispatch(signOut())}}
-                />
+                />:<DrawerItem
+                    icon={({color, size}) => (
+                        <Icon
+                            name="exit-to-app"
+                            color={color}
+                            size={size}
+                        />
+                    )}
+                    label="Sign In"
+                    onPress={() => {dispatch(questExit())}}
+                />}
             </Drawer.Section>
         </View>
     )

@@ -2,6 +2,7 @@ import React,{useEffect,useState} from 'react';
 import api from "../api/api";
 import {CheckSquareOutlined,CloseSquareOutlined,MessageOutlined} from "@ant-design/icons";
 import Confirmation from "../components/Confirmation";
+import RequestMessage from "../components/RequestMessage";
 import {Tooltip,Table } from "antd";
 
 const { Column } = Table;
@@ -67,8 +68,23 @@ const DeclineRequest = ({item,reload})=>{
     )
 }
 
-const SentMessage = (request)=>{
-    return (<MessageOutlined style={{ fontSize: '32px', color: '#08c' }}/>)
+const SentMessage = ({item})=>{
+    const [showModal,setShowModal] = useState(false);
+
+    const handleMessage = ()=>{
+        setShowModal(true);
+    }
+    const handleClose = ()=>{
+        setShowModal(false);
+    }
+    return (
+        <>
+            <Tooltip title={"Send message"} placement={"right"}>
+            <MessageOutlined style={{ fontSize: '32px', color: '#08c' }} onClick={handleMessage}/>
+        </Tooltip>
+            <RequestMessage show={showModal} handleClose={handleClose} request={item}/>
+        </>
+     )
 }
 const Requests = () => {
     const [requestData,setRequestData] = useState([]);

@@ -107,3 +107,49 @@ body {
     font-weight: bold;
     letter-spacing: 5px;
 }
+.bl-container{
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+}
+.bl-messages {
+    max-height: 300px;
+    min-height: 300px;
+    border-radius: 20px;
+    padding:10px;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}
+.bl-message{
+    display: flex;
+    flex-direction: column;
+}
+.bl-inputbox{
+    display: flex;
+    margin-top: 10px;
+    justify-content: space-between;
+    align-items: center;
+}
+.bl-sentIcon{
+    margin-left: 10px;
+}
+.bl-message-text{
+    background-color: #cbc9c9;
+    border-radius: 10px;
+    max-width: 300px;
+    text-wrap: normal;
+    min-height: 20px;
+    padding: 10px;
+
+}
+.bl-message-user{
+    margin-left: 5px;
+}
+.bl-confirmation-footer{
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+}
+.bl-btn{
+    width:100px;
+    margin-right: 10px;
+}

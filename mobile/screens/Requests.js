@@ -18,7 +18,7 @@ const Requests = () => {
             setIsLoading(true);
             const token = await AsyncStorage.getItem(ASYNC_STORAGE_KEY);
             ///get/requests/patient
-            const result = await axios.get(SERVER_ADRESA + "/get_requests/patient",{
+            const result = await axios.get(SERVER_ADRESA + "/get/requests/patient",{
                 headers:{
                     'Content-Type':"application/json",
                     "x-access-token": token,
@@ -26,7 +26,6 @@ const Requests = () => {
             });
             setRequests(result.data);
             setIsLoading(false);
-            console.log(result.data);
 
         }catch (err){
             console.log(err);
@@ -51,8 +50,7 @@ const Requests = () => {
     return (
         <View style={styles.container}>
             <FlatList data={requests}  onRefresh={fetchRequests} refreshing={isLoading} renderItem={({item})=>{
-                console.log("ovo je flat list",item);
-                return <TouchableOpacity onPress={handleRequest}>
+                return <TouchableOpacity onPress={handleRequest.bind(this,item)}>
                     <View style={styles.requestContainer}>
                         <View style={styles.box}>
                             <Text style={styles.text}>Date</Text>
