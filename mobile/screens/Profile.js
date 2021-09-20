@@ -50,6 +50,7 @@ const Profile = ({navigation}) => {
             email:false,
             phoneNumber: true,
             age:true,
+            image:true,
         },
         formIsValid:false,
     });
@@ -64,10 +65,6 @@ const Profile = ({navigation}) => {
         });
         return unsubscribe;
     },[navigation]);
-
-
-
-
 
     const onInputChange = useCallback((inputIdentifier,inputValue,inputValidity)=>{
         dispatchFormState({type:FORM_INPUT_UPDATE,value:inputValue,isValid:inputValidity,input:inputIdentifier});
@@ -85,7 +82,8 @@ const Profile = ({navigation}) => {
             Alert.alert("Error","Something went wrong! Please try again.",[{text:"OK"}])
             console.log(err);
         }
-    }
+    };
+
     const handleUpdatePassword = ()=>{
         setShowChangePassword(true);
     };

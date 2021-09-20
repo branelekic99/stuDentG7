@@ -1,13 +1,20 @@
 import React, {useState, useReducer, useCallback,useEffect} from 'react';
-import {View, Text, StyleSheet, Platform, Alert, TouchableOpacity, TextInput, StatusBar,KeyboardAvoidingView} from "react-native";
+import {
+    View,
+    Text,
+    StyleSheet,
+    Platform,
+    TouchableOpacity,
+    StatusBar,
+    Image
+} from "react-native";
 import * as Animatable from 'react-native-animatable';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import Input from "../components/Input";
 
 import {useTheme} from 'react-native-paper';
 import {useDispatch} from "react-redux";
-import {signIn} from "../redux-store/actions/auth";
+import {guestSignIn, signIn} from "../redux-store/actions/auth";
 
 const FORM_INPUT_UPDATE = "FORM_INPUT_UPDATE";
 
@@ -69,6 +76,9 @@ const SignIn = ({navigation}) => {
     const handleSignUp = ()=>{
         navigation.push("SignUp");
     }
+    const handleGuestLogin = ()=>{
+        dispatch(guestSignIn());
+    }
     const onInputChange = useCallback((inputIdentifier,inputValue,inputValidity)=>{
         dispatchFormState({type:FORM_INPUT_UPDATE,value:inputValue,isValid:inputValidity,input:inputIdentifier});
     },[dispatchFormState])
@@ -77,9 +87,12 @@ const SignIn = ({navigation}) => {
         <View style={styles.container}>
             <StatusBar backgroundColor={"#009387"} barStyle={"light-content"}/>
             <View style={styles.header}>
-                <Text style={styles.header_text}>Log In!</Text>
+                <View style={styles.logoContainer}>
+                    <Image source={require("../assets/tooth-logo.png")} style={{width:200,height:200}}/>
+                </View>
             </View>
             <Animatable.View animation={"fadeInUpBig"} style={[styles.footer, {backgroundColor: colors.background}]}>
+                <Text style={styles.header_text}>Log In!</Text>
                 <View style={styles.errorContainer}>
                     {formError && <Text style={styles.authError}>{formError}</Text>}
                 </View>
@@ -125,6 +138,12 @@ const SignIn = ({navigation}) => {
                     <TouchableOpacity style={[styles.signIn,{backgroundColor:"#e4f7f1"}]} onPress={handleSignUp}>
                         <Text style={[styles.textSign,{color:colors.text}]}>Sing Up</Text>
                     </TouchableOpacity>
+                    <View style={styles.guestContainer}>
+                        <TouchableOpacity style={styles.guest} onPress={handleGuestLogin}>
+                            <Text style={{color:"blue"}}>Go as guest</Text>
+                        </TouchableOpacity>
+                    </View>
+
                 </View>
             </Animatable.View>
 
@@ -136,16 +155,24 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#009387"
     },
+    logoContainer:{
+        marginTop:100,
+        marginBottom:30,
+        flex:1,
+        justifyContent:"center",
+        alignItems:"center",
+    },
     header: {
         flex: 1,
-        justifyContent: "flex-end",
-        paddingHorizontal: 20,
-        paddingBottom: 50
+        alignItems:"center",
+        marginBottom: 60,
+        // paddingHorizontal: 20,
+        // paddingBottom: 50
     },
     header_text: {
-        color: "#fff",
+        color: "black",
         fontWeight: "bold",
-        fontSize: 30
+        fontSize: 30,
     },
     footer: {
         flex: 3,
@@ -153,7 +180,7 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
         paddingHorizontal: 20,
-        paddingVertical: 30
+        paddingVertical:30,
     },
     footer_text: {
         color: "#fff",
@@ -197,6 +224,14 @@ const styles = StyleSheet.create({
         borderRadius:10,
         backgroundColor:"#4dab8d",
         marginTop:20,
+    },
+    guestContainer:{
+        width:"90%",
+        flexDirection: "row",
+        justifyContent:"flex-end"
+    },
+    guest:{
+        marginVertical:20,
     }
 })
 export default SignIn;

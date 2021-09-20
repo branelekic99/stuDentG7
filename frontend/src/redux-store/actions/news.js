@@ -1,5 +1,5 @@
 import {ADD_NEWS, CLEAR_SELECTED_ITEM, DELETE_NEWS, GET_NEWS, GET_NEWS_BY_ID,UPDATE_NEWS} from "./type";
-
+import {notification} from "antd";
 import api from "../../api/api";
 
 export const addNews = data =>{
@@ -8,6 +8,10 @@ export const addNews = data =>{
             const result = await api.post("/admin/create/news",data);
             dispatch({
                 type:ADD_NEWS
+            });
+            notification.open({
+                message:"News created",
+                description:"New news has been successfully created!"
             })
         }catch (err){
             console.log(err)
@@ -23,7 +27,6 @@ export const getNews = (offset = 0)=>{
     return async function (dispatch){
         try{
             const result = await api.get(`/get/news/paginated?limit=10&offset=${offset}`);
-            console.log(result.data)
             dispatch({
                 type:GET_NEWS,
                 payload:result.data
@@ -35,13 +38,16 @@ export const getNews = (offset = 0)=>{
 };
 export const updateNews = (id,data)=>{
     return async (dispatch)=>{
-        console.log("OVDE SAM!",data)
         try{
             console.log("uasao u try blok")
             const result = await api.put(`/admin/update/news/${id}`,data);
             console.log(result)
             dispatch({
                 type:UPDATE_NEWS,
+            })
+            notification.open({
+                message:"News updated",
+                description:"News has been successfully updated!"
             })
         }catch (err){
             console.log(err)
@@ -67,6 +73,10 @@ export const deleteNews = (id)=>{
             const result = await api.delete(`/admin/delete/news/${id}`);
             dispatch({
                 type:DELETE_NEWS
+            })
+            notification.open({
+                message:"News deleted",
+                description:"New news has been successfully deleted!"
             })
         }catch (err){
             console.log(err)

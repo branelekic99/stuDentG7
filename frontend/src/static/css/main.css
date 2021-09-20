@@ -1,0 +1,97 @@
+@import "button.css";
+@import "navbar.css";
+@import "media-query.css";
+
+:root {
+    --full-white: #FFFFFF;
+    --black: #111725;
+
+    --light-gray:#e6e6e6;
+
+    --light-blue:#2bb6d8;
+    --light-blue-hover:#159fc2;
+
+    /* color for error */
+    --red: #FF6663;
+}
+
+body {
+    background-color: var(--light-gray)!important;
+}
+
+.sv-login-page-form {
+    position: fixed;
+    right: 0;
+    bottom: 50%;
+}
+.sv-login-page {
+    background-image: url("../images/slika2.jpg");
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.sv-image-card {
+    max-height: 303px;
+    min-height: 303px;
+}
+.sv-border-bottom{
+    border-bottom: 1px solid var(--light-blue-hover);
+}
+
+.bl-home {
+    height: 90vh
+}
+.bl-news-header{
+    justify-content: space-between;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--light-blue-hover);
+}
+.bl-news-add{
+    justify-content:center;
+    text-align: center;
+    display: flex;
+}
+.bl-news-actions{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.bl-schedule{
+    flex: 1;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+.bl-schedule-select{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.bl-select-label{
+    font-size: 20px;
+    margin-right: 10px;
+}
+.bl-schedule-container{
+    flex:1;
+    /*padding:10px;*/
+}
+.bl-box{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+.bl-appointments-select{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.bl-appointments-header{
+    display: flex;
+    flex-direction: row;
+}
+.bl-radiobutton{
+    display: flex;
+    align-content: center;
+    align-items: center;
+    margin-left: 20px;
+}

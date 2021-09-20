@@ -5,7 +5,7 @@ import {Modal,Button} from "react-bootstrap";
 
 const CustomModal = ({show,handleClose,title,submit,children}) => {
     return (
-        <Modal show={show} onHide={handleClose} backdrop={"static"}>
+        <Modal show={show} onHide={handleClose} backdrop={"static"} size={"lg"}>
             <Modal.Header>
                 <Modal.Title>{title}</Modal.Title>
             </Modal.Header>

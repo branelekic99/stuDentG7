@@ -1,9 +1,10 @@
-import {GET_GALLERY, GET_PROFILE, SIGN_IN, UPDATE_PROFILE} from "../types";
+import {GET_PROFILE, SIGN_IN, UPDATE_PROFILE,LOG_OUT,GUEST_MODE} from "../types";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {ASYNC_STORAGE_KEY} from "../../constants/variables";
 
 const initState = {
     authenticated:false,
+    guestMode:false,
     id:"",
     age:"",
     email:"",
@@ -25,6 +26,11 @@ const authReducer = (state=initState,action)=>{
                 lastName: action.payload.lastName,
                 phoneNumber: action.payload.phoneNumber
             }
+        case GUEST_MODE:
+            return {
+                ...state,
+                guestMode: true,
+            }
         case UPDATE_PROFILE:
             return {
                 ...state,
@@ -45,11 +51,9 @@ const authReducer = (state=initState,action)=>{
                 lastName: action.payload.lastName,
                 phoneNumber: action.payload.phoneNumber
             }
-        // case GET_GALLERY:
-        //     console.log("OVO JE REDUCER",action.payload)
-        //     return {
-        //         ...state,
-        //     }
+        case LOG_OUT:
+            AsyncStorage.removeItem(ASYNC_STORAGE_KEY);
+            return initState;
         default:
             return initState;
     }

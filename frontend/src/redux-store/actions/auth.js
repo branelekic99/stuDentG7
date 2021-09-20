@@ -59,7 +59,7 @@ export const createAdmin = (data)=>{
                 type:CREATE_ADMIN
             })
         }catch (err){
-            throw new Error("Something went wrong!");
+            throw err;
         }
     }
 };

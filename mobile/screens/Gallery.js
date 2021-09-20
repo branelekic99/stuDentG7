@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {
     View,
-    Text,
     FlatList,
     Modal,
     SafeAreaView,
@@ -9,28 +8,22 @@ import {
     StyleSheet,
     Image,
     Dimensions,
-    Button
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 
 import {ASYNC_STORAGE_KEY, SERVER_ADRESA} from "../constants/variables";
 import axios from "axios";
-import FastImage from "react-native-fast-image";
 
 const {width} = Dimensions.get('window');
 
 const Gallery = () => {
     const [images,setImages] = useState([]);
+    const [modalVisible,setModalVisible] = useState(false);
+    const [selectedImage,setSelectedImage] = useState("");
 
-    // console.log(images);
     const fetchData = async ()=>{
-        const token = await AsyncStorage.getItem(ASYNC_STORAGE_KEY);
-        const result = await axios.get(SERVER_ADRESA + "/get/gallery",{
-            headers:{
-                'Content-Type':"application/json",
-                "x-access-token": token,
-            }
-        });
+        const result = await axios.get(SERVER_ADRESA + "/get/gallery");
         setImages(result.data);
     };
 
@@ -38,6 +31,17 @@ const Gallery = () => {
         fetchData();
     },[]);
     return (
+        <SafeAreaView style={styles.container}>
+            <Modal transparent={true} animationType={"fade"} visible={modalVisible}>
+                <View style={styles.modalStyle}>
+                    <View style={styles.closeButton}>
+                        <TouchableOpacity onPress={()=>setModalVisible(false)}>
+                            <FontAwesome name={"close"} color={"black"} size={40}/>
+                        </TouchableOpacity>
+                    </View>
+                    <Image source={{uri:selectedImage}} style={{width:"85%",height:"50%"}} />
+                </View>
+            </Modal>
         <View style={styles.container}>
             <FlatList data={images}
                       horizontal={false}
@@ -47,7 +51,8 @@ const Gallery = () => {
                           return<View style={styles.imageContainerStyle}>
                               <TouchableOpacity key={item.id}
                                   onPress={() => {
-                                              // showModalFunction(true, item.src);
+                                              setSelectedImage(imageUrl);
+                                              setModalVisible(true);
                                           }}>
                                   <Image source={{uri:imageUrl}} style={styles.imageStyle} />
                                   </TouchableOpacity>
@@ -56,6 +61,7 @@ const Gallery = () => {
             keyExtractor={item=>item.id.toString()}
             />
         </View>
+        </SafeAreaView>
     );
 };
 const styles = StyleSheet.create({
@@ -82,12 +88,6 @@ const styles = StyleSheet.create({
         width: '98%',
         resizeMode: 'contain',
     },
-    modelStyle: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'rgba(0,0,0,0.4)',
-    },
     closeButtonStyle: {
         width: 25,
         height: 25,
@@ -95,6 +95,19 @@ const styles = StyleSheet.create({
         right: 20,
         position: 'absolute',
     },
+    modalStyle:{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0,0,0,0.4)',
+    },
+    closeButton:{
+        flexDirection:"row",
+        width:"100%",
+        justifyContent:"flex-end",
+        marginRight:20,
+        marginVertical:20,
+    }
 });
 
 export default Gallery;
