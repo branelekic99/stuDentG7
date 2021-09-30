@@ -92,8 +92,7 @@ const Requests = () => {
     const fetchRequests = async ()=>{
         try{
             const result = await api.get("/admin/get_unapproved_requests");
-            // const patientData=  await api.get("/get/patient");
-            console.log(result.data)
+            console.log(result.data);
             setRequestData(result.data)
         }catch (err){
             console.log(err)
@@ -114,7 +113,7 @@ const Requests = () => {
                     return new Date(value).toLocaleString()
                 }}/>
                 <Column title="Description" dataIndex={"description"} key={"id"} />
-                {/*<Column title="Category" dataIndex="categoryId" key="categoryId"*/}
+                {/*<Column title="User" dataIndex="categoryId" key="categoryId"*/}
                 {/*        render={(value)=>{*/}
                 {/*            return categories.find(category=>category.id === value)?.name*/}
                 {/*        }} />*/}

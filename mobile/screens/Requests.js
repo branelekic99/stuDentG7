@@ -47,6 +47,11 @@ const Requests = () => {
             <ActivityIndicator size={"large"} color={"black"}/>
         </View>
     }
+    if(requests.length === 0){
+        return <View style={styles.noDataIndicator}>
+            <Text style={styles.noDataTextIndicator}>No data</Text>
+        </View>
+    }
     return (
         <View style={styles.container}>
             <FlatList data={requests}  onRefresh={fetchRequests} refreshing={isLoading} renderItem={({item})=>{
@@ -92,6 +97,13 @@ const styles = StyleSheet.create({
     },
     text:{
         fontSize:20,
+    },
+    noDataIndicator:{
+        alignItems:"center",
+    },
+    noDataTextIndicator:{
+        fontSize:20,
+        marginVertical:10,
     }
 })
 export default Requests;
