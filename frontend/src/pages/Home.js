@@ -61,22 +61,22 @@ const Home = () => {
                 <Carousel autoplay>
                     <div>
                         <div style={images.image1}>
-                            <h1>StuDent</h1>
+                            <h1 className={"bl-home-title"}>StuDent</h1>
                         </div>
                     </div>
                     <div>
                         <div style={images.image2}>
-                            <h1>StuDent</h1>
+                            <h1 className={"bl-home-title"}>StuDent</h1>
                         </div>
                     </div>
                     <div>
                         <div style={images.image3}>
-                            <h1>StuDent</h1>
+                            <h1 className={"bl-home-title"}>StuDent</h1>
                         </div>
                     </div>
                     <div>
                         <div style={images.image4}>
-                            <h1>StuDent</h1>
+                            <h1 className={"bl-home-title"}>StuDent</h1>
                         </div>
                     </div>
                 </Carousel>,

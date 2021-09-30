@@ -33,7 +33,6 @@ const ReserveAppointment = ({item})=>{
             <AppointmentReservation form_ref={form_ref} appointment_id={item.id}/>
         </CustomModal>
         <Tooltip title={"Make reservation"} placement={"right"}>
-
             <ScheduleOutlined style={{ fontSize: '32px', color: '#08c' }} onClick={freeAppointment}/>
         </Tooltip>
     </>

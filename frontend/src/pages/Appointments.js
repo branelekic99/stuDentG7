@@ -170,7 +170,7 @@ const Appointments = () => {
                 </div>
 
                 <div className={"bl-radiobutton"}>
-                    <label className={"bl-select-label"}>Rezervisani</label>
+                    <label className={"bl-select-label"}>Reserved</label>
                     <Switch onChange={handleSwitchOnChange} />
                 </div>
             </div>
@@ -178,10 +178,10 @@ const Appointments = () => {
 
 
                         {reserved?<Table dataSource={appointments}>
-                            <Column title="Start time" dataIndex = {["Appointment","startTime"]} key={["Appointment","startTime"]} render={(value)=>{
+                            <Column title="Start time" dataIndex = {["Apointment","startTime"]} key={["Apointment","startTime"]} render={(value)=>{
                                 return new Date(value).toLocaleString()
                             }}/>
-                            <Column title="Start time" dataIndex={["Appointment","endTime"]} key={["Appointment","startTime"]} render={(value)=>{
+                            <Column title="Start time" dataIndex={["Apointment","endTime"]} key={["Apointment","startTime"]} render={(value)=>{
                                 return new Date(value).toLocaleString()
                             }}/>
                             <Column title="Description" dataIndex="description" key="description"/>

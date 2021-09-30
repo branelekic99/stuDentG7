@@ -52,7 +52,8 @@ const News = () => {
                         </TouchableOpacity>
                     </View>
                     <View style={styles.newsDetails}>
-                        <Image source={{uri:selectedItemImage}} style={{width:"80%",height:200}}/>
+                        {selectedItemImage ? <Image source={{uri:selectedItemImage}} style={{width:"80%",height:200}}/>:
+                            <Image source={require("../assets/default.jpg")} style={{width:"80%",height:200}}/>}
                         <View style={styles.newsContent}>
                             <Text style={styles.newsTitle}>{selectedItem?.title}</Text>
                             <ScrollView>
@@ -62,7 +63,6 @@ const News = () => {
                     </View>
                 </View>
             </Modal>
-
                 <FlatList
                     data={newsData}
                     onRefresh={fetchData}
@@ -77,7 +77,7 @@ const News = () => {
                                 <TouchableOpacity onPress={handleNewsDetails.bind(this,item,imageurl)}>
                                     <Card style={styles.card}>
                                         <Card.Content>
-                                            <Card.Cover source={{ uri: imageurl }} />
+                                            {imageurl? <Card.Cover source={{ uri: imageurl }} />:<Card.Cover source={require("../assets/default.jpg") } />}
                                             <Title>{title}</Title>
                                             {/*<Paragraph>{content}</Paragraph>*/}
                                         </Card.Content>

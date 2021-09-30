@@ -132,7 +132,7 @@ const Schedule = () => {
                                 return categories.find(category=>category.id === value)?.name
                             }} />
                     <Column title={"Actions"} render={(value,object)=><Tooltip title={"Delete"} placement={"top"}>
-                        <DeleteOutlined key="delete" onClick={handleDeleteModalShow.bind(this,object)} size={40} />
+                        <DeleteOutlined key="delete" onClick={handleDeleteModalShow.bind(this,object)} style={{ fontSize: '32px', color: '#08c',marginRight:15}} />
                     </Tooltip>}/>
                 </Table>
             </div>

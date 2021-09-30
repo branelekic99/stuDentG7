@@ -155,8 +155,7 @@ exports.getPatientRequests = async (req, res) => {
     try {
         const request = await Request.findAll({
             where: {
-                patientId: req.userId,
-                approved: false
+                patientId: req.userId
             },
             include: {
                 model: Apointment,

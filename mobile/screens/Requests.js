@@ -1,5 +1,5 @@
 import React, {useEffect,useState} from 'react';
-import {Text, View, FlatList, StyleSheet, TouchableOpacity} from "react-native";
+import {Text, View, FlatList, StyleSheet, TouchableOpacity, ActivityIndicator} from "react-native";
 import {useSelector} from "react-redux";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -11,17 +11,22 @@ const Requests = () => {
     const [requests,setRequests] = useState([]);
     const [showModal,setShowModal] = useState(false);
     const [selectedRequest,setSelectedRequest] = useState(null);
+    const [isLoading,setIsLoading] = useState(false);
 
     const fetchRequests = async()=>{
         try{
+            setIsLoading(true);
             const token = await AsyncStorage.getItem(ASYNC_STORAGE_KEY);
-            const result = await axios.get(SERVER_ADRESA + "/get_requests/patient",{
+            ///get/requests/patient
+            const result = await axios.get(SERVER_ADRESA + "/get/requests/patient",{
                 headers:{
                     'Content-Type':"application/json",
                     "x-access-token": token,
                 }
             });
             setRequests(result.data);
+            setIsLoading(false);
+
         }catch (err){
             console.log(err);
         }
@@ -37,11 +42,15 @@ const Requests = () => {
         setSelectedRequest(selectedItem);
         setShowModal(true);
     }
+    if(isLoading){
+        return <View style={{flex:1,justifyContent:"center",alignItems:"center"}}>
+            <ActivityIndicator size={"large"} color={"black"}/>
+        </View>
+    }
     return (
         <View style={styles.container}>
-            <FlatList data={requests} renderItem={({item})=>{
-                console.log("ovo je flat list",item);
-                return <TouchableOpacity onPress={handleRequest}>
+            <FlatList data={requests}  onRefresh={fetchRequests} refreshing={isLoading} renderItem={({item})=>{
+                return <TouchableOpacity onPress={handleRequest.bind(this,item)}>
                     <View style={styles.requestContainer}>
                         <View style={styles.box}>
                             <Text style={styles.text}>Date</Text>
