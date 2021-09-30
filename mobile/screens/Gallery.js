@@ -27,6 +27,7 @@ const Gallery = () => {
         try{
             setIsLoading(true);
             const result = await axios.get(SERVER_ADRESA + "/get/gallery");
+            console.log(result.data)
             setImages(result.data);
             setIsLoading(false);
         }catch (err){

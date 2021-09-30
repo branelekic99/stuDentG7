@@ -48,7 +48,7 @@ const Profile = ({navigation}) => {
             lastName: true,
             email:false,
             phoneNumber: true,
-            age:true,
+            age:false,
         },
         formIsValid:false,
     });
@@ -168,13 +168,14 @@ const Profile = ({navigation}) => {
                 <Text style={styles.label}>Age</Text>
                 <View style={styles.inputContainer}>
                     <Input
+                        required
                         id={"age"}
                         keyboardType={"numeric"}
                         placeholder={"Your age"}
                         placeholderTextColor={"#666666"}
                         autoCapitalize={"none"}
                         onInputChange={onInputChange}
-                        errorText={""}
+                        errorText={"Please enter your age!"}
                         initialValue={formState.inputValues.age}
                         initiallyValid={true}
                         icon={<FontAwesome name={"user-o"} color={"gray"} size={20}/>}

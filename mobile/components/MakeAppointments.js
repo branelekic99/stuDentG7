@@ -23,7 +23,7 @@ const MakeAppointment = ({item,onClose,show,refreshData}) => {
                     "x-access-token": token,
                 }
             });
-            Alert.alert("Success","Appointment reserved!",[{text:"OK"}]);
+            Alert.alert("Success","Appointment request successfully sent!",[{text:"OK"}]);
             onClose();
             refreshData();
 

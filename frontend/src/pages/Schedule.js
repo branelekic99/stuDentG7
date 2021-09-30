@@ -112,7 +112,7 @@ const Schedule = () => {
                     <Select
                         showSearch
                         style={{ width: 200,zIndex:5 }}
-                        placeholder="Select a person"
+                        placeholder="Select category"
                         optionFilterProp="children"
                         defaultValue={selectedCategory}
                         onChange={handleSelectChange}

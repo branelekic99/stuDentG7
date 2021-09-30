@@ -48,7 +48,7 @@ const SignUp = ({navigation}) => {
             lastName: true,
             email:false,
             number: true,
-            age:true,
+            age:false,
         },
         formIsValid:false,
     });
@@ -153,6 +153,7 @@ const SignUp = ({navigation}) => {
                 <Text style={[styles.footer_text, {color: colors.text}]}>Age</Text>
                 <View style={styles.action_box}>
                     <Input
+                        required
                         id={"age"}
                         keyboardType={"numeric"}
                         placeholder={"Your age"}
@@ -161,7 +162,7 @@ const SignUp = ({navigation}) => {
                         onInputChange={onInputChange}
                         errorText={""}
                         initialValue={""}
-                        initiallyValid={true}
+                        initiallyValid={false}
                         icon={<FontAwesome name={"user-o"} color={colors.text} size={20}/>}
                     />
                 </View>

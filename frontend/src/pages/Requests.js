@@ -92,6 +92,8 @@ const Requests = () => {
     const fetchRequests = async ()=>{
         try{
             const result = await api.get("/admin/get_unapproved_requests");
+            const patientData=  await api.get("/get/patient");
+            console.log(result.data)
             setRequestData(result.data)
         }catch (err){
             console.log(err)
