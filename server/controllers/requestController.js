@@ -134,7 +134,7 @@ exports.getFutureRequests = async (req, res) => {
             where: {
                 approved: false
             },
-            include: {
+            include: [{
                 model: Apointment,
                 order: [
                     ['startTime', 'ASC']
@@ -152,11 +152,10 @@ exports.getFutureRequests = async (req, res) => {
                         attributes: ['name']
                     }
                 }
-            },
-            include: {
+            }, {
                 model: Patient,
                 attributes: ['firstName', 'lastName', 'email', 'imageUrl']
-            }
+            }]
         });
         
         res.send(request);
