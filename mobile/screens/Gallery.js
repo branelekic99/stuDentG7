@@ -7,7 +7,7 @@ import {
     TouchableOpacity,
     StyleSheet,
     Image,
-    Dimensions,
+    Dimensions, ActivityIndicator, Text,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
@@ -21,15 +21,28 @@ const Gallery = () => {
     const [images,setImages] = useState([]);
     const [modalVisible,setModalVisible] = useState(false);
     const [selectedImage,setSelectedImage] = useState("");
+    const [isLoading,setIsLoading] = useState(false);
 
     const fetchData = async ()=>{
-        const result = await axios.get(SERVER_ADRESA + "/get/gallery");
-        setImages(result.data);
+        try{
+            setIsLoading(true);
+            const result = await axios.get(SERVER_ADRESA + "/get/gallery");
+            console.log(result.data)
+            setImages(result.data);
+            setIsLoading(false);
+        }catch (err){
+            console.log(err);
+        }
     };
 
     useEffect(()=>{
         fetchData();
     },[]);
+    if(isLoading){
+        return <View style={{flex:1,justifyContent:"center",alignItems:"center"}}>
+            <ActivityIndicator size={"large"} color={"black"}/>
+        </View>
+    }
     return (
         <SafeAreaView style={styles.container}>
             <Modal transparent={true} animationType={"fade"} visible={modalVisible}>
@@ -46,8 +59,11 @@ const Gallery = () => {
             <FlatList data={images}
                       horizontal={false}
                       numColumns={3}
+                      onRefresh={fetchData}
+                      refreshing={isLoading}
+                      ListEmptyComponent={<View style={styles.noData}><Text style={styles.noDataText}>No data</Text></View>}
                       renderItem={({item})=>{
-                  let imageUrl = item.imageUrl?.replace("http://127.0.0.1:8000",SERVER_ADRESA);
+                  let imageUrl = SERVER_ADRESA +"/"+ item.imageUrl;
                           return<View style={styles.imageContainerStyle}>
                               <TouchableOpacity key={item.id}
                                   onPress={() => {
@@ -107,7 +123,12 @@ const styles = StyleSheet.create({
         justifyContent:"flex-end",
         marginRight:20,
         marginVertical:20,
-    }
+    } ,
+    noData:{
+        flex:1,
+        justifyContent:"center",
+        alignItems:"center",
+    },
 });
 
 export default Gallery;

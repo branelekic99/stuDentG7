@@ -8,15 +8,17 @@ const Confirmation = ({show,handleClose,confirm,title=""}) => {
                 <Modal.Title>{title}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <h4>Please confirm your action</h4>
+                <h5>Please confirm your action!</h5>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="btn btn-secondary" onClick={handleClose}>
+                <div className={"bl-confirmation-footer"}>
+                <Button variant="btn btn-secondary bl-btn" onClick={handleClose}>
                     No
                 </Button>
-                <Button variant="btn btn-primary" onClick={confirm}>
+                <Button variant="btn btn-primary bl-btn" onClick={confirm}>
                     Yes
                 </Button>
+                </div>
             </Modal.Footer>
         </Modal>
     );

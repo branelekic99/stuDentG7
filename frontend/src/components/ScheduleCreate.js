@@ -81,7 +81,7 @@ const ScheduleCreate = ({form_ref,categories}) => {
                         <Select
                             showSearch
                             style={{ width: 500,zIndex:5 }}
-                            placeholder="Select a person"
+                            placeholder="Select category"
                             optionFilterProp="children"
                             onChange={handleSelectChange}
                             getPopupContainer={node => node.parentNode}

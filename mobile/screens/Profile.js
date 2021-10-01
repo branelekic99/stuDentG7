@@ -9,7 +9,6 @@ import {getUserById, updateProfile} from "../redux-store/actions/auth";
 
 const FORM_INPUT_UPDATE = "FORM_INPUT_UPDATE";
 
-
 const formReducer = (state,action) =>{
     if(action.type === FORM_INPUT_UPDATE){
         const updateValues ={
@@ -49,8 +48,7 @@ const Profile = ({navigation}) => {
             lastName: true,
             email:false,
             phoneNumber: true,
-            age:true,
-            image:true,
+            age:false,
         },
         formIsValid:false,
     });
@@ -73,14 +71,20 @@ const Profile = ({navigation}) => {
     const handleUpdateProfile = async () =>{
         try{
             if(formState.formIsValid){
-                await dispatch(updateProfile(formState.inputValues,profile.id));
+                const formData = new FormData();
+                formData.append("age",formState.inputValues.age);
+                formData.append("email",formState.inputValues.email);
+                formData.append("firstName",formState.inputValues.firstName);
+                formData.append("lastName",formState.inputValues.lastName);
+                formData.append("phoneNumber",formState.inputValues.phoneNumber);
+                await dispatch(updateProfile(formData,profile.id));
                 //done show notification
                 Alert.alert("Success","Porfile successefully updated!",[{text:"OK"}])
             }
         }catch (err){
             //show error
             Alert.alert("Error","Something went wrong! Please try again.",[{text:"OK"}])
-            console.log(err);
+            console.log(err.response.data);
         }
     };
 
@@ -93,7 +97,9 @@ const Profile = ({navigation}) => {
     return (
         <View style={styles.container}>
             <View style={styles.imageContainer}>
-                <Image style={styles.image} source={{uri:"https://img.freepik.com/free-photo/pleasant-looking-serious-man-stands-profile-has-confident-expression-wears-casual-white-t-shirt_273609-16959.jpg?size=626&ext=jpg"}} />
+                <TouchableOpacity>
+                    <Image style={styles.image} source={require("../assets/user.png")} />
+                </TouchableOpacity>
             </View>
             <Text>{profile.firstName} {profile.lastName}</Text>
             <View style={styles.profileDetails}>
@@ -162,13 +168,14 @@ const Profile = ({navigation}) => {
                 <Text style={styles.label}>Age</Text>
                 <View style={styles.inputContainer}>
                     <Input
+                        required
                         id={"age"}
                         keyboardType={"numeric"}
                         placeholder={"Your age"}
                         placeholderTextColor={"#666666"}
                         autoCapitalize={"none"}
                         onInputChange={onInputChange}
-                        errorText={""}
+                        errorText={"Please enter your age!"}
                         initialValue={formState.inputValues.age}
                         initiallyValid={true}
                         icon={<FontAwesome name={"user-o"} color={"gray"} size={20}/>}
@@ -233,8 +240,5 @@ const styles = StyleSheet.create({
         justifyContent:"center",
         marginTop:10
     },
-    actionText:{
-
-    }
 })
 export default Profile;

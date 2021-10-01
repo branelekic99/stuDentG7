@@ -26,6 +26,7 @@ const News = () => {
     const fetchData = async ()=>{
         setIsLoading(true);
         const result = await axios.get(SERVER_ADRESA + "/get/news/paginated");
+        console.log(result.data)
         setNewsData(result.data.rows);
         setIsLoading(false);
     };
@@ -48,11 +49,12 @@ const News = () => {
                 <View style={styles.modalStyle}>
                     <View style={styles.closeButton}>
                         <TouchableOpacity onPress={()=>setShowNewsModal(false)}>
-                            <FontAwesome name={"close"} color={"gray"} size={40}/>
+                            <FontAwesome name={"close"} color={"#484a48"} size={40}/>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.newsDetails}>
-                        <Image source={{uri:selectedItemImage}} style={{width:"80%",height:200}}/>
+                        {selectedItemImage ? <Image source={{uri:selectedItemImage}} style={{width:"80%",height:200}}/>:
+                            <Image source={require("../assets/default.jpg")} style={{width:"80%",height:200}}/>}
                         <View style={styles.newsContent}>
                             <Text style={styles.newsTitle}>{selectedItem?.title}</Text>
                             <ScrollView>
@@ -62,7 +64,6 @@ const News = () => {
                     </View>
                 </View>
             </Modal>
-
                 <FlatList
                     data={newsData}
                     onRefresh={fetchData}
@@ -71,15 +72,14 @@ const News = () => {
                         const {content,id,imageUrl,title} = item;
                         let imageurl = "";
                         if(imageUrl){
-                            imageurl = imageUrl.replace("http://127.0.0.1:8000",SERVER_ADRESA);
+                            imageurl = SERVER_ADRESA + "/"+ imageUrl;
                         }
                         return(
                                 <TouchableOpacity onPress={handleNewsDetails.bind(this,item,imageurl)}>
                                     <Card style={styles.card}>
                                         <Card.Content>
-                                            <Card.Cover source={{ uri: imageurl }} />
+                                            {imageurl? <Card.Cover source={{ uri: imageurl }} />:<Card.Cover source={require("../assets/default.jpg") } />}
                                             <Title>{title}</Title>
-                                            {/*<Paragraph>{content}</Paragraph>*/}
                                         </Card.Content>
                                     </Card>
                                 </TouchableOpacity>

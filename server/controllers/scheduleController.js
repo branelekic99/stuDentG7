@@ -1,5 +1,6 @@
 const db = require("../models");
 const Schedule = db.Schedule;
+const Category = db.Category;
 const categoryController = require("./categoryController");
 const apointmentController = require("./apointmentController");
 
@@ -44,8 +45,18 @@ exports.getScheduleById = async (req, res) => {
         const schedule = await Schedule.findOne({ 
             where: {
                 id: req.params.id
+            },
+            include: {
+                model: Category,
+                attributes: ['name']
             }
         });
+
+        if(schedule == null) {
+            res.status(404).send({
+                message: "Schedule does not exist!"
+            });
+        }
 
         let apointments = await apointmentController.getAvailableApointmentsByScheduleId(req.params.id);
 

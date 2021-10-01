@@ -34,21 +34,21 @@ const formReducer = (state,action) =>{
 }
 const SignUp = ({navigation}) => {
     const dispatch = useDispatch();
-
+    const [signUpError,setSignUpError] = useState("");
     const [formState,dispatchFormState] = useReducer(formReducer,{
         inputValues:{
             firstName:'',
             lastName:'',
             email:'',
             number:'',
-            age:'',
+            age:0,
         },
         inputValidity:{
             firstName: true,
             lastName: true,
             email:false,
             number: true,
-            age:true,
+            age:false,
         },
         formIsValid:false,
     });
@@ -62,12 +62,18 @@ const SignUp = ({navigation}) => {
     const handleSignIn = ()=>{
         navigation.pop();
     };
-    const handleSignUp = ()=>{
-       if(formState.formIsValid){
-           dispatch(sigUp(formState.inputValues));
-       }else{
-           console.log("GRESKA!");
-       }
+    const handleSignUp = async()=>{
+        try{
+            if(formState.formIsValid){
+                formState.inputValues.number = parseInt(formState.inputValues.number);
+                await dispatch(sigUp(formState.inputValues));
+                Alert.alert("Success","Account created,check your email for your password!",[{text:"OK"}]);
+                handleSignIn();
+            }
+        }catch (err){
+           setSignUpError(err.response.data.message);
+        }
+
     }
     const {colors} = useTheme();
     return (
@@ -76,7 +82,9 @@ const SignUp = ({navigation}) => {
             <View style={styles.header}>
                 <Text style={styles.header_text}>Create your account!</Text>
             </View>
+
             <Animatable.View animation={"fadeInUpBig"} style={[styles.footer, {backgroundColor: colors.background}]}>
+                <Text style={styles.errorMessage}>{signUpError}</Text>
                 <Text style={[styles.footer_text, {color: colors.text}]}>First name</Text>
                 <View style={styles.action_box}>
                     <Input
@@ -145,6 +153,7 @@ const SignUp = ({navigation}) => {
                 <Text style={[styles.footer_text, {color: colors.text}]}>Age</Text>
                 <View style={styles.action_box}>
                     <Input
+                        required
                         id={"age"}
                         keyboardType={"numeric"}
                         placeholder={"Your age"}
@@ -153,7 +162,7 @@ const SignUp = ({navigation}) => {
                         onInputChange={onInputChange}
                         errorText={""}
                         initialValue={""}
-                        initiallyValid={true}
+                        initiallyValid={false}
                         icon={<FontAwesome name={"user-o"} color={colors.text} size={20}/>}
                     />
                 </View>
@@ -228,6 +237,10 @@ const styles = StyleSheet.create({
         borderRadius:10,
         backgroundColor:"#4dab8d",
         marginTop:20,
+    },
+    errorMessage:{
+        color:"#FF0000",
+        fontSize:14,
     }
 
 })

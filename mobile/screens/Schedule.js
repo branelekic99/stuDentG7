@@ -5,8 +5,10 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import {Picker} from "@react-native-picker/picker";
 import {ASYNC_STORAGE_KEY, SERVER_ADRESA} from "../constants/variables";
 import MakeAppointment from "../components/MakeAppointments";
+import {useSelector} from "react-redux";
 
 const Schedule = () => {
+    const {authenticated} = useSelector(state=>state.auth)
     const [categories, setCategories] = useState([]);
     const [appointments,setAppointments] = useState([]);
     const [error,setError] = useState("");
@@ -99,11 +101,12 @@ const Schedule = () => {
                             <Text style={styles.text}>Start time</Text>
                             <Text style={styles.text}>{new Date(item.startTime).toLocaleTimeString()}</Text>
                         </View>
-                        <View style={styles.action}>
+                        {authenticated ?<View style={styles.action}>
                             <TouchableOpacity style={styles.actionButton} onPress={handleReservation.bind(this,item)}>
-                                <Text style={styles.actionText}>Rezervisi</Text>
+                                <Text style={styles.actionText}>Reserve</Text>
                             </TouchableOpacity>
-                        </View>
+                        </View>:<View></View>}
+
                     </View>
                 }} keyExtractor={item=>item.id.toString()}/>}
             <MakeAppointment show={isModalVisible} onClose={handleModalClose} item={selectedAppointment} refreshData={fetchAvailableAppointments}/>

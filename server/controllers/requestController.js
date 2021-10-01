@@ -1,9 +1,11 @@
 const apointmentController = require("../controllers/apointmentController");
 const messageController = require("../controllers/messageController");
 const db = require("../models");
+const schedule = require("../models/schedule");
 const Request = db.Request;
 const Apointment = db.Apointment;
-const Message = db.Message;
+const Schedule = db.Schedule;
+const Category = db.Category;
 const Patient = db.Patient;
 const Admin = db.Admin;
 
@@ -132,7 +134,7 @@ exports.getFutureRequests = async (req, res) => {
             where: {
                 approved: false
             },
-            include: {
+            include: [{
                 model: Apointment,
                 order: [
                     ['startTime', 'ASC']
@@ -141,8 +143,19 @@ exports.getFutureRequests = async (req, res) => {
                     startTime: {
                         [Op.gte]: Date.now()
                     },
+                }, 
+                include: {
+                    model: Schedule,
+                    attributes: ['categoryId'],
+                    include: {
+                        model: Category,
+                        attributes: ['name']
+                    }
                 }
-            }
+            }, {
+                model: Patient,
+                attributes: ['firstName', 'lastName', 'email', 'imageUrl']
+            }]
         });
         
         res.send(request);
@@ -155,8 +168,7 @@ exports.getPatientRequests = async (req, res) => {
     try {
         const request = await Request.findAll({
             where: {
-                patientId: req.userId,
-                approved: false
+                patientId: req.userId
             },
             include: {
                 model: Apointment,
@@ -167,6 +179,14 @@ exports.getPatientRequests = async (req, res) => {
                     startTime: {
                         [Op.gte]: Date.now()
                     },
+                }, 
+                include: {
+                    model: Schedule,
+                    attributes: ['categoryId'],
+                    include: {
+                        model: Category,
+                        attributes: ['name']
+                    }
                 }
             }
         });
@@ -192,6 +212,14 @@ exports.getRequest = async (req, res) => {
                     startTime: {
                         [Op.gte]: Date.now()
                     },
+                }, 
+                include: {
+                    model: Schedule,
+                    attributes: ['categoryId'],
+                    include: {
+                        model: Category,
+                        attributes: ['name']
+                    }
                 }
             }
         });
