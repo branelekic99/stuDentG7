@@ -47,16 +47,19 @@ const Requests = () => {
             <ActivityIndicator size={"large"} color={"black"}/>
         </View>
     }
-    if(requests.length === 0){
-        return <View style={styles.noDataIndicator}>
-            <Text style={styles.noDataTextIndicator}>No data</Text>
-        </View>
-    }
     return (
         <View style={styles.container}>
-            <FlatList data={requests}  onRefresh={fetchRequests} refreshing={isLoading} renderItem={({item})=>{
+            <FlatList data={requests}  onRefresh={fetchRequests} refreshing={isLoading}
+                      ListEmptyComponent={<View style={styles.noDataIndicator}>
+                          <Text style={styles.noDataTextIndicator}>No data</Text>
+                      </View>}
+                      renderItem={({item})=>{
+                          const categoryName = item?.Apointment?.Schedule?.Category?.name;
                 return <TouchableOpacity onPress={handleRequest.bind(this,item)}>
                     <View style={styles.requestContainer}>
+                        <View>
+                            <Text style={{...styles.text,marginBottom:10,color:"gray"}}>{categoryName}</Text>
+                        </View>
                         <View style={styles.box}>
                             <Text style={styles.text}>Date</Text>
                             <Text style={styles.text}>{new Date(item.Apointment?.startTime).toLocaleDateString()}</Text>

@@ -113,10 +113,11 @@ const Requests = () => {
                     return new Date(value).toLocaleString()
                 }}/>
                 <Column title="Description" dataIndex={"description"} key={"id"} />
-                {/*<Column title="User" dataIndex="categoryId" key="categoryId"*/}
-                {/*        render={(value)=>{*/}
-                {/*            return categories.find(category=>category.id === value)?.name*/}
-                {/*        }} />*/}
+                <Column title="User" dataIndex={"Patient"}
+                        render={(value)=>{
+                            console.log(value)
+                            return value.firstName + " " + value.lastName
+                        }} />
                 <Column title={"Actions"} render={(value,object)=>{
                     return <>
                         <ApproveRequest item={object} reload={fetchRequests}/>
