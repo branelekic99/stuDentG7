@@ -58,18 +58,15 @@ const SignIn = ({navigation}) => {
     });
 
     const {colors} = useTheme();
-
-    // useEffect(()=>{
-    //     dispatch(signIn({email:"branisalekic60@gmail.com",password:"123"}));
-    // },[]);
-
     const handleSignIn = async ()=>{
         try{
             if(formState.formIsValid){
                await dispatch(signIn(formState.inputValues));
             }
         }catch (err){
-            setFormError(err.message);
+            if(err.message){
+                setFormError(err.message);
+            }
         }
     }
 
