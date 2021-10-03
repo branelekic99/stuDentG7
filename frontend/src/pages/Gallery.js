@@ -105,7 +105,7 @@ const Gallery = () => {
                 </div>
             </div>
 
-            <CustomModal show={showModal} handleClose={handleClose} title={"News create"} submit={handleSubmit}>
+            <CustomModal show={showModal} handleClose={handleClose} title={"Add image"} submit={handleSubmit}>
                 <AddImage form_ref={form_ref}/>
             </CustomModal>
             <Confirmation show={showDeleteModal} handleClose={handleDeleteModalClose} confirm={handleDelete}/>
