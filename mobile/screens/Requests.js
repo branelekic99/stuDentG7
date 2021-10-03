@@ -17,6 +17,7 @@ const Requests = () => {
         try{
             setIsLoading(true);
             const token = await AsyncStorage.getItem(ASYNC_STORAGE_KEY);
+
             ///get/requests/patient
             const result = await axios.get(SERVER_ADRESA + "/get/requests/patient",{
                 headers:{
@@ -24,6 +25,7 @@ const Requests = () => {
                     "x-access-token": token,
                 }
             });
+
             setRequests(result.data);
             setIsLoading(false);
 

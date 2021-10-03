@@ -1,5 +1,5 @@
 import React, {useState, useReducer, useCallback} from 'react';
-import {View, Text, StyleSheet, Platform, Alert, TouchableOpacity, TextInput, StatusBar,KeyboardAvoidingView} from "react-native";
+import {View, Text, StyleSheet, Platform, Alert, TouchableOpacity, TextInput, StatusBar,KeyboardAvoidingView,ScrollView} from "react-native";
 import * as Animatable from 'react-native-animatable';
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Feather from 'react-native-vector-icons/Feather';
@@ -71,13 +71,16 @@ const SignUp = ({navigation}) => {
                 handleSignIn();
             }
         }catch (err){
-           setSignUpError(err.response.data.message);
+           setSignUpError(err?.response?.data?.message);
         }
 
     }
     const {colors} = useTheme();
     return (
         <KeyboardAvoidingView style={{flex:1}}>
+            <ScrollView>
+
+
         <View style={styles.container}>
             <View style={styles.header}>
                 <Text style={styles.header_text}>Create your account!</Text>
@@ -177,19 +180,20 @@ const SignUp = ({navigation}) => {
                 </View>
             </Animatable.View>
         </View>
+            </ScrollView>
         </KeyboardAvoidingView>
     );
 };
 const styles = StyleSheet.create({
     container:{
         flex:1,
-        backgroundColor: "#009387"
+        backgroundColor: "#009387",
     },
     header:{
-        flex: 1,
         justifyContent: "flex-end",
         paddingHorizontal: 20,
-        paddingBottom: 20
+        paddingBottom: 20,
+        paddingVertical:20,
     },
     header_text:{
         color: "#fff",
@@ -227,7 +231,7 @@ const styles = StyleSheet.create({
     },
     buttons:{
         alignItems:"center",
-        marginTop:10
+        marginTop:10,
     },
     signIn:{
         width:"100%",

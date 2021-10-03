@@ -13,10 +13,10 @@ const Confirmation = ({show,handleClose,confirm,title=""}) => {
             <Modal.Footer>
                 <div className={"bl-confirmation-footer"}>
                 <Button variant="btn btn-secondary bl-btn" onClick={handleClose}>
-                    No
+                    Cancel
                 </Button>
                 <Button variant="btn btn-primary bl-btn" onClick={confirm}>
-                    Yes
+                    Confirm
                 </Button>
                 </div>
             </Modal.Footer>

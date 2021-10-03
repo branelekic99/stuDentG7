@@ -137,7 +137,7 @@ const Schedule = () => {
                 </Table>
             </div>
 
-            <Confirmation show={showDeleteModal} handleClose={handleDeleteModalClose} confirm={handleDelete}/>
+            <Confirmation show={showDeleteModal} handleClose={handleDeleteModalClose} confirm={handleDelete} title={"Delete Schedule"}/>
         </div>
     );
 };

@@ -41,7 +41,7 @@ const NewsUpdate = ({form_ref}) => {
                 <div className={"row"}>
                     <div className={"col-12 col-md-12 col-lg-12 col-xl-12 form-group"}>
                         <label>Content</label>
-                        <textarea className={"form-control"} {...register("content",{required:true})} />
+                        <textarea className={"form-control"} {...register("content",{required:true})} rows={5}/>
                         {errors.content && <span>{REQUIRED_FIELD}</span>}
                     </div>
                 </div>

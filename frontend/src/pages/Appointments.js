@@ -4,86 +4,15 @@ import {Select,Table, Switch ,Tooltip } from "antd";
 
 import api from "../api/api";
 import {
-    cancelReservation,
-    getAppointmentsForCategory,
     getAvailableAppointmentsForCategory,
     getReservedAppointmentsForCategory
 
 } from "../redux-store/actions/appointmens";
-// import {CloseCircleOutlined, ScheduleOutlined } from '@ant-design/icons';
-// import CustomModal from "../components/CustomModal";
-// import AppointmentReservation from "../components/AppointmentReservation";
-// import Confirmation from "../components/Confirmation";
 import ReserveAppointment from "../components/ReserveAppointment";
 import ReleaseAppointment from "../components/ReleaseAppointment";
 
 const {Option} = Select;
 const { Column } = Table;
-
-// const ReleaseAppointment = ({item})=>{
-//     const dispatch = useDispatch();
-//
-//     const [showModal,setShowModal] = useState(false);
-//
-//     const reFetch = useSelector(state=>state.appointments.reload);
-//
-//     useEffect(()=>{
-//         if(!reFetch)
-//             return;
-//         setShowModal(false);
-//     },[reFetch]);
-//
-//    const handleConfirmation = async ()=>{
-//         await dispatch(cancelReservation(item.Apointment.id));
-//         handleClose();
-//    }
-//    const handleRelease = ()=>{
-//         setShowModal(true);
-//    }
-//     const handleClose = ( ) =>{
-//         setShowModal(false);
-//     }
-//     return <>
-//         <Confirmation show={showModal} handleClose={handleClose} title={"Appointment cancellation"} confirm={handleConfirmation}/>
-//         <Tooltip title={"Clear appointment"} placement={"right"}>
-//             <CloseCircleOutlined style={{ fontSize: '32px', color: '#08c' }} onClick={handleRelease}/>
-//         </Tooltip>
-//     </>
-// }
-// const ReserveAppointment = ({item})=>{
-//     const form_ref = useRef();
-//     const [showModal,setShowModal] = useState(false);
-//
-//     const reFetch = useSelector(state=>state.appointments.reload);
-//
-//     useEffect(()=>{
-//         if(!reFetch)
-//             return;
-//         setShowModal(false);
-//     },[reFetch]);
-//
-//     const handleSubmit = (e)=>{
-//         form_ref.current.dispatchEvent(
-//             new Event("submit", { cancelable: true, bubbles: true })
-//         );
-//     };
-//     const freeAppointment = ()=>{
-//         setShowModal(true);
-//     }
-//     const handleCancel = ()=>{
-//         setShowModal(false);
-//     }
-//     return <>
-//         <CustomModal show={showModal} handleClose={handleCancel} title={"Make reservation"} submit={handleSubmit}>
-//             <AppointmentReservation form_ref={form_ref} appointment_id={item.id}/>
-//         </CustomModal>
-//         <Tooltip title={"Make reservation"} placement={"right"}>
-//
-//             <ScheduleOutlined style={{ fontSize: '32px', color: '#08c' }} onClick={freeAppointment}/>
-//         </Tooltip>
-//     </>
-// };
-
 
 const Appointments = () => {
 

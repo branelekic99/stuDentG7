@@ -35,7 +35,7 @@ const News = () => {
 
     const news_list = useSelector(state => state.news.news_list);
 
-    const offset = useSelector(state => state.news.offset);
+    const offset = parseInt(useSelector(state => state.news.offset));
     const count = useSelector(state => state.news.count);
     const re_fetch = useSelector(state => state.news.reload);
 
@@ -97,38 +97,38 @@ const News = () => {
         setDeleteModal(true);
     }
     const handleNextClick = () => {
-        console.log(offset)
         fetch_data(offset + 10);
     }
     const handlePreviousClick = () => {
-        if(offset === 0) {
-            console.log("prosao")
+        if (offset === 0) {
             return;
-        };
-        console.log(offset)
+        }
+        ;
         fetch_data(offset - 10);
     }
     if (showLoader) {
         return <CustomLoader/>;
     }
+    console.log(offset)
+    console.log(count)
     return (
         <>
             <div className={"container-fluid"}>
 
                 <div className={"sv-border-bottom bl-news-header"}>
                     <div className={"bl-news-actions"}>
-                            <button className={"btn btn-primary w-30"} onClick={handleAddNews}>Create News
-                            </button>
+                        <button className={"btn btn-primary w-30"} onClick={handleAddNews}>Create News
+                        </button>
                         <div style={{display: "flex"}}>
-                            <Tooltip title={"Previous page"} placement={"right"}>
-                                <CaretLeftOutlined style={{fontSize: '32px', color: '#08c'}}
-                                                           onClick={handlePreviousClick}/>
-                            </Tooltip>
+                            {offset > 0 && <Tooltip title={"Previous page"} placement={"right"}>
 
-                            <Tooltip title={"Next page"} placement={"right"}>
+                                <CaretLeftOutlined style={{fontSize: '32px', color: '#08c'}}
+                                                   onClick={handlePreviousClick}/>
+                            </Tooltip>}
+                            {count > 10 && (offset+10) < count && <Tooltip title={"Next page"} placement={"right"}>
                                 <CaretRightOutlined style={{fontSize: '32px', color: '#08c'}}
-                                                            onClick={handleNextClick}/>
-                            </Tooltip>
+                                                    onClick={handleNextClick}/>
+                            </Tooltip>}
                         </div>
                     </div>
                 </div>
@@ -137,18 +137,20 @@ const News = () => {
                     {news_list.map(item => (
                         <div className={"col-12 col-md-12 col-lg-3 col-xl-3 pt-3 pb-3"}>
                             <div className="card">
-                                {<img  className={"sv-image-card"} src={item.imageUrl ? item.imageUrl : default_img}/>}
+                                {<img className={"sv-image-card"} src={item.imageUrl ? item.imageUrl : default_img}/>}
                                 <div className="card-body">
                                     <h5>{item.title}</h5>
-                                    <p>{item.content?.length > 40?item.content.substr(0,40) + "...":item.content}</p>
+                                    <p>{item.content?.length > 40 ? item.content.substr(0, 40) + "..." : item.content}</p>
                                 </div>
                                 <div className={"card-footer"}>
                                     <div className={"row"}>
                                         <div className={"col-12 col-md-12 col-lg-6 col-xl-6 p-1"}>
-                                            <button className="btn btn-primary w-100" onClick={handleCardClick.bind(this, item)}> <FaEdit/> </button>
+                                            <button className="btn btn-primary w-100"
+                                                    onClick={handleCardClick.bind(this, item)}><FaEdit/></button>
                                         </div>
                                         <div className={"col-12 col-md-12 col-lg-6 col-xl-6 p-1"}>
-                                            <button className="btn btn-primary w-100 float-end" onClick={handleDeleteModalShow.bind(this, item)}> <FaTrash/> </button>
+                                            <button className="btn btn-primary w-100 float-end"
+                                                    onClick={handleDeleteModalShow.bind(this, item)}><FaTrash/></button>
                                         </div>
                                     </div>
                                 </div>
