@@ -109,8 +109,6 @@ const News = () => {
     if (showLoader) {
         return <CustomLoader/>;
     }
-    console.log(offset)
-    console.log(count)
     return (
         <>
             <div className={"container-fluid"}>

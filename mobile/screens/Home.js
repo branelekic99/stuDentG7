@@ -23,10 +23,9 @@ const Home = ({navigation}) => {
                    </View>
                 <View style={styles.bottomView}>
                     <TouchableOpacity style={styles.makeAppointment} onPress={handleMakeAppointment}>
-                        <Text style={styles.makeAppointmentText}>Naruci se</Text>
+                        <Text style={styles.makeAppointmentText}>Make appointment</Text>
                     </TouchableOpacity>
-                    <Text style={styles.message}>Ne dopustiste da vasi zubi propadaju!</Text>
-                    <Text style={styles.message}>Narucite se odmah!</Text>
+                    <Text style={styles.message}>Smile, it lets your teeth breathe.</Text>
                 </View>
             </ImageBackground>
         </View>
@@ -42,13 +41,11 @@ const styles = StyleSheet.create({
     },
     imageBackgroundContainer:{
         flex:1,
-        // justifyContent:"center",
     },
     title:{
         fontSize:40,
         fontWeight:"bold",
         color:"#fff",
-        // textTransform:"uppercase"
     },
     titleContainer:{
         flex:1,

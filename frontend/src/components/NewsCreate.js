@@ -9,7 +9,6 @@ const NewsCreate = ({form_ref}) => {
     const {register,formState:{errors},handleSubmit} = useForm();
 
     const onsubmit = data=>{
-        console.log(data)
         const formData = new FormData();
         formData.append("title",data.title)
         formData.append("content",data.content)

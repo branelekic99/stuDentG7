@@ -31,7 +31,7 @@ const DrawerScreen = ()=>(
         <Drawer.Screen name={"Home"} component={Home} options={{headerShown:false}}/>
         <Drawer.Screen name={"News"} component={News} options={{headerShown:true}}/>
         <Drawer.Screen name={"Gallery"} component={Gallery} options={{headerShown:true}}/>
-        <Drawer.Screen name={"Profile"} component={Profile} options={{headerShown:true,headerStyle:{backgroundColor: '#f4511e',height:100}}}/>
+        <Drawer.Screen name={"Profile"} component={Profile} options={{headerShown:true}}/>
         <Drawer.Screen name={"Schedule"} component={Schedule} options={{headerShown:true}}/>
         <Drawer.Screen name={"Requests"} component={Requests} options={{headerShown:true}}/>
     </Drawer.Navigator>
@@ -49,7 +49,6 @@ const RootStackScreen = ({authenticated,guest})=>(
 
 const Navigation = ()=>{
     const {authenticated,guestMode} = useSelector(state=>state.auth);
-    console.log("change ide");
     return (
         <NavigationContainer>
             <RootStackScreen authenticated={authenticated} guest={guestMode}/>

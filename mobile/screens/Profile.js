@@ -85,7 +85,6 @@ const Profile = ({navigation}) => {
         } catch (err) {
             //show error
             Alert.alert("Error", "Something went wrong! Please try again.", [{text: "OK"}])
-            console.log(err.response.data);
         }
     };
 
