@@ -9,6 +9,7 @@ const NewsCreate = ({form_ref}) => {
     const {register,formState:{errors},handleSubmit} = useForm();
 
     const onsubmit = data=>{
+        console.log(data)
         const formData = new FormData();
         formData.append("title",data.title)
         formData.append("content",data.content)
@@ -34,7 +35,7 @@ const NewsCreate = ({form_ref}) => {
                 <div className={"row"}>
                     <div className={"col-12 col-md-12 col-lg-12 col-xl-12 form-group"}>
                         <label>Content</label>
-                        <textarea className={"form-control"} {...register("content",{required:true})} />
+                        <textarea className={"form-control"} {...register("content",{required:true})} rows={6}/>
                         {errors.content && <span>{REQUIRED_FIELD}</span>}
                     </div>
                 </div>

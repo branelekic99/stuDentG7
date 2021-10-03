@@ -115,8 +115,11 @@ const Requests = () => {
                 <Column title="Description" dataIndex={"description"} key={"id"} />
                 <Column title="User" dataIndex={"Patient"}
                         render={(value)=>{
-                            console.log(value)
-                            return value.firstName + " " + value.lastName
+                            let name = value.firstName + " " +value.lastName;
+                            if(!name){
+                                name = value.email;
+                            }
+                            return name;
                         }} />
                 <Column title={"Actions"} render={(value,object)=>{
                     return <>

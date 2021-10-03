@@ -16,6 +16,7 @@ const Login = () => {
     const auth_error = useSelector(state => state.auth.auth_error_message);
     const {register, formState: {errors}, handleSubmit} = useForm();
     const [showPassword, setShowPassword] = useState(false)
+
     const togglePassword = () => {
         setShowPassword(showPassword ? false : true)
     }
@@ -56,7 +57,7 @@ const Login = () => {
                                     <Form.Label className={"fw-bold"}>Username</Form.Label>
                                     <Form.Control type={"text"}
                                                   placeholder={"Enter username"} {...register("username", {required: true})}/>
-                                    {errors.username && (<p>Please enter your username</p>)}
+                                    {errors.username && (<p className={"bl-error"}>Please enter your username!</p>)}
                                 </div>
                             </div>
                             <div className={"row d-flex justify-content-center pt-3"}>
@@ -64,7 +65,7 @@ const Login = () => {
                                     <Form.Label className={"fw-bold"}>Password</Form.Label>
                                     <Form.Control type={showPassword ? "text" : "password"}
                                                   placeholder={"Password"} {...register("password", {required: true})}/>
-                                    {errors.password && (<p>Please enter your password</p>)}
+                                    {errors.password && (<p  className={"bl-error"}>Please enter your password!</p>)}
                                     <button className="btn btn-show-password" type="button"
                                             onClick={togglePassword}>{showPassword ? <BsFillEyeSlashFill/> :
                                         <BsFillEyeFill/>}</button>

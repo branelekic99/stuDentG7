@@ -115,7 +115,7 @@ exports.getAvailableApointmentsByCategoryId = async (req, res) => {
             const apointment = await apointmentController.getAvailableApointmentsByScheduleId(schedule.id);
             apointments.push(...apointment);
         }
-
+        apointments.sort((a1, a2) => a1.startTime < a2.startTime);
         res.send(apointments);
     } catch(err) {
         res.status(500).send({ message: err.message });
@@ -146,7 +146,7 @@ exports.getReservedApointmentsByCategoryId = async (req, res) => {
             const apointment = await apointmentController.getReservedApointmentsByScheduleId(schedule.id);
             apointments.push(...apointment);
         }
-
+        apointments.sort((a1, a2) => a1.startTime < a2.startTime);
         res.send(apointments);
     } catch(err) {
         res.status(500).send({ message: err.message });

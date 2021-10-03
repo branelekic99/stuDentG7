@@ -100,12 +100,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: 'rgba(0,0,0,0.4)',
+
     },
     closeButton:{
         flexDirection:"row",
         width:"100%",
         justifyContent: "flex-end",
-        marginTop:100,
+        marginTop:60,
         marginRight:10,
     },
     newsDetails:{
@@ -114,6 +115,7 @@ const styles = StyleSheet.create({
         justifyContent:"flex-start",
         alignItems: "center",
         marginHorizontal:50,
+        paddingBottom:40,
     },
     newsContent:{
         width:"80%",

@@ -9,6 +9,7 @@ export const sigUp = data=>{
             const result = await axios.post(SERVER_ADRESA + "/patient/signup",data);
 
         }catch (err){
+            console.log(err);
             throw err;
         }
     }
