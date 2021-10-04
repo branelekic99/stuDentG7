@@ -44,3 +44,14 @@ server/config/smtpConfig.json
     "pass": ""
 }
 ```
+
+### How to run Web? ###
+* Navigate to frontend directory
+* Run ```npm install```
+* Run ```npm start```
+
+### How to run Mobile app? ###
+* Navigate to moble directory
+* Run ```npm install```
+* Run ```npm start``
+* Navigate to mobile/constants/variable.js and for SERVER_ADRESA enter your server address
