@@ -48,5 +48,5 @@ server/config/smtpConfig.json
 ### How to run Mobile app? ###
 * Navigate to moble directory
 * Run ```npm install```
-* Run ```npm start````
+* Run ```npm start```
 * Navigate to mobile/constants/variable.js and for SERVER_ADRESA enter your server address
