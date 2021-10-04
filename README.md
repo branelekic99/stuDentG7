@@ -19,8 +19,8 @@ Root repository for StuDent project with frontend and api
 ### How to run Client? ###
 
 * Navigate to frontend directory
-* Run npm install
-* Run npm start
+* Run ```npm install```
+* Run ```npm start```
 * Log in to administrator panel with username: "Admin" and password: "admin"
 
 ```
