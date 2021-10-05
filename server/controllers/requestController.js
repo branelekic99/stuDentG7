@@ -82,21 +82,29 @@ exports.declainRequest = async (req, res) => {
             res.status(404).send({
                 message: "Request does not exist!"
             });
-        }
+        } else {
 
-        await apointmentController.declainApointment(request.apointmentId);
-        
-        await messageController.deleteRequestMessages(request.id);
+            if(req.userType == 'patient' && request.patientId != req.userId) {
+                res.status(403).send({
+                    message: "Patient is not owner of reqest!"
+                });
+            } else {
 
-        await Request.destroy({
-            where: {
-                id: req.params.id
+                await apointmentController.declainApointment(request.apointmentId);
+                
+                await messageController.deleteRequestMessages(request.id);
+
+                await Request.destroy({
+                    where: {
+                        id: req.params.id
+                    }
+                });
+
+                res.send({
+                    message: "Request is declined successfully!"
+                });
             }
-        });
-
-        res.send({
-            message: "Request is declined successfully!"
-        });
+        }
     } catch(err) {
         res.status(500).send({ message: err.message });
     }
