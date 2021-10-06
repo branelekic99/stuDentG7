@@ -18,9 +18,9 @@ Root repository for StuDent project with frontend and api
 
 ### How to run Client? ###
 
-* Navigate to client directory
-* Run npm install
-* Run npm start
+* Navigate to frontend directory
+* Run ```npm install```
+* Run ```npm start```
 * Log in to administrator panel with username: "Admin" and password: "admin"
 
 ```
@@ -44,3 +44,9 @@ server/config/smtpConfig.json
     "pass": ""
 }
 ```
+
+### How to run Mobile app? ###
+* Navigate to moble directory
+* Run ```npm install```
+* Run ```npm start```
+* Navigate to mobile/constants/variable.js and for SERVER_ADRESA enter your server address
